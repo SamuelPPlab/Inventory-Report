@@ -29,7 +29,7 @@ class SimpleReport:
         return list_current_validate_value
 
     @staticmethod
-    def __generate_name_company(list_dict):
+    def _generate_name_company(list_dict, sort_value):
         list_names = dict()
         for product in list_dict:
             if not list_names.get(product["nome_da_empresa"]):
@@ -37,22 +37,26 @@ class SimpleReport:
             else:
                 list_names[product["nome_da_empresa"]] += 1
 
-        name_company_highest_qtd_products = sorted(
-            list_names.items(), key=lambda x: x[1], reverse=True
-        )[0][0]
-        return name_company_highest_qtd_products
+        if sort_value is True:
+            name_company_highest_qtd_products = sorted(
+                list_names.items(), key=lambda x: x[1], reverse=True
+            )
+            return name_company_highest_qtd_products
+        else:
+            # print(list_names)
+            return list_names
 
     @staticmethod
     def generate(list_dict):
         date_value = SimpleReport.__generate_date_fabrication(list_dict)
         current_validate = SimpleReport.__generate_current_validate(list_dict)
-        name_company = SimpleReport.__generate_name_company(list_dict)
+        name_company = SimpleReport._generate_name_company(list_dict, True)
 
         message = (
             f"Data de fabricação mais antiga: {date_value}\n"
             f"Data de validade mais próxima: {current_validate}\n"
             "Empresa com maior quantidade de produtos estocados: "
-            f"{name_company}\n"
+            f"{name_company[0][0]}\n"
         )
         return message
 
