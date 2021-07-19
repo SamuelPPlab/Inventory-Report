@@ -7,11 +7,13 @@ class Report(ABC):
     def generate(data: list[dict]) -> str:
         raise NotImplementedError
 
+    @staticmethod
     def extract_dates(
         data: list[dict], key: str, format: str = "%Y-%m-%d"
     ) -> list[datetime]:
         return [datetime.strptime(item[key], format) for item in data]
 
+    @staticmethod
     def count_occurrences(data: list[dict]) -> list[dict]:
         items = []
         for item in data:
