@@ -20,9 +20,9 @@ def load_data(path, report_type):
 
 def print_report(data, report_type):
     if report_type == 'simples':
-        print(SimpleReport.generate(data))
+        print(SimpleReport.generate(data), end="")
     elif report_type == 'completo':
-        print(CompleteReport.generate(data))
+        print(CompleteReport.generate(data), end="")
 
 
 def main():
