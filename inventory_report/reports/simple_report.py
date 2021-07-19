@@ -2,15 +2,17 @@ from datetime import date
 
 
 class SimpleReport:
-    # def _generate_ordest_date:
-
     @staticmethod
-    def generate(list_dict):
+    def __generate_date_fabrication(list_dict):
         list_oldest_date = sorted(
             list_dict, key=lambda i: (i["data_de_fabricacao"]), reverse=False
         )
-        list_oldest_date_value = list_oldest_date[0]["data_de_fabricacao"]
 
+        list_oldest_date_value = list_oldest_date[0]["data_de_fabricacao"]
+        return list_oldest_date_value
+
+    @staticmethod
+    def __generate_current_validate(list_dict):
         list_current_validate = sorted(
             list_dict,
             key=lambda i: (i["data_de_validade"]),
@@ -22,8 +24,12 @@ class SimpleReport:
             for item in list_current_validate
             if item["data_de_validade"] > str(date.today())
         ]
-        list_current_validate_value = list_current_validate_sort[0]
 
+        list_current_validate_value = list_current_validate_sort[0]
+        return list_current_validate_value
+
+    @staticmethod
+    def __generate_name_company(list_dict):
         list_names = dict()
         for product in list_dict:
             if not list_names.get(product["nome_da_empresa"]):
@@ -34,15 +40,20 @@ class SimpleReport:
         name_company_highest_qtd_products = sorted(
             list_names.items(), key=lambda x: x[1], reverse=True
         )[0][0]
-        # print(name_company_highest_qtd_products)
+        return name_company_highest_qtd_products
+
+    @staticmethod
+    def generate(list_dict):
+        date_value = SimpleReport.__generate_date_fabrication(list_dict)
+        current_validate = SimpleReport.__generate_current_validate(list_dict)
+        name_company = SimpleReport.__generate_name_company(list_dict)
 
         message = (
-            f"Data de fabricação mais antiga: {list_oldest_date_value}\n"
-            f"Data de validade mais próxima: {list_current_validate_value}\n"
+            f"Data de fabricação mais antiga: {date_value}\n"
+            f"Data de validade mais próxima: {current_validate}\n"
             "Empresa com maior quantidade de produtos estocados: "
-            f"{name_company_highest_qtd_products}\n"
+            f"{name_company}\n"
         )
-        # print(message)
         return message
 
 
@@ -92,7 +103,4 @@ if __name__ == "__main__":
         },
     ]
 
-    # simple_report = SimpleReport()
-    # simple_report.generate(LIST_EXAMPLE)
-
-    # print(SimpleReport.generate(LIST_EXAMPLE))
+    print(SimpleReport.generate(LIST_EXAMPLE))
