@@ -4,21 +4,40 @@ import datetime
 class SimpleReport:
     @staticmethod
     def manufacture_date(data):
-        max_manufacture_date = datetime.timedelta.max
+        max_manufacture_date = datetime.datetime.max
         for oldest_manufacture in data:
-            if oldest_manufacture["data_de_fabricacao"] < max_manufacture_date:
-                max_manufacture_date = oldest_manufacture["data_de_fabricacao"]
-        return max_manufacture_date
+            if (
+                datetime.datetime.strptime(
+                    oldest_manufacture["data_de_fabricacao"], "%Y-%m-%d"
+                )
+                < max_manufacture_date
+            ):
+                max_manufacture_date = datetime.datetime.strptime(
+                    oldest_manufacture["data_de_fabricacao"], "%Y-%m-%d"
+                )
+        return max_manufacture_date.date()
 
     @staticmethod
     def validity(data):
-        today = datetime.today().strftime("%Y-%m-%d")
-        closest_validity = datetime.timedelta.max
+        today = datetime.datetime.today()
+        closest_validity = datetime.datetime.max
         for validity in data:
-            if validity["data_de_validade"] > today:
-                if validity["data_de_validade"] < closest_validity:
-                    closest_validity = validity["data_de_validade"]
-        return closest_validity
+            if (
+                datetime.datetime.strptime(
+                    validity["data_de_validade"], "%Y-%m-%d"
+                )
+                > today
+            ):
+                if (
+                    datetime.datetime.strptime(
+                        validity["data_de_validade"], "%Y-%m-%d"
+                    )
+                    < closest_validity
+                ):
+                    closest_validity = datetime.datetime.strptime(
+                        validity["data_de_validade"], "%Y-%m-%d"
+                    )
+        return closest_validity.date()
 
     @staticmethod
     def company_with_more_itens(data):
