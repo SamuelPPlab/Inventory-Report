@@ -73,4 +73,4 @@ if __name__ == "__main__":
 #     - Newton Laboratories, Inc.: QUANTIDADE
 #     - Forces of Nature: QUANTIDADE
 
-    # print(CompleteReport.generate(LIST_EXAMPLE))
+    print(CompleteReport.generate(LIST_EXAMPLE))
