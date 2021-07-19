@@ -3,9 +3,8 @@ from statistics import mode
 
 
 class SimpleReport:
-  
     def expire_date(date):
-        return datetime.strptime(date, "%Y-%m-%d") > datetime.today()    
+        return datetime.strptime(date, "%Y-%m-%d") > datetime.today()
 
     def generate(list):
         oldest_product = min(product["data_de_fabricacao"] for product in list)
