@@ -2,6 +2,8 @@ from datetime import date
 
 
 class SimpleReport:
+    # def _generate_ordest_date:
+
     @staticmethod
     def generate(list_dict):
         list_oldest_date = sorted(
