@@ -17,7 +17,7 @@ class CompleteReport(SimpleReport):
             in count_companies_products
         ]
 
-        companies_report_string = "zn".join(companies_report_list)
+        companies_report_string = "\n".join(companies_report_list)
 
         return (
             f"{simple_report}"
