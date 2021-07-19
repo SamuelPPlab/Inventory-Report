@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 from collections import Counter
 from datetime import datetime
 
