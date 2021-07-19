@@ -1,19 +1,38 @@
-# from datetime import timedelta
+from datetime import datetime
 import json
 
 
 class SimpleReport:
-    def __init__(self, content):
-        self.content = content
+    def generate(lista):
+        listas_empresas = lista
 
-    def generate():
+        quantidadeProdutos = max(
+            [item["nome_da_empresa"] for item in listas_empresas]
+        )
+
+        current_time = datetime.today().strftime("%Y-%m-%d")
+
+        nearest_expiration_date = min(
+            data["data_de_validade"]
+            for data in listas_empresas
+            if data["data_de_validade"] > current_time
+        )
+
+        oldest_date = min(
+            data["data_de_fabricacao"] for data in listas_empresas
+        )
+
+        return (
+            f"Data de fabricação mais antiga: {oldest_date}\n"
+            f"Data de validade mais próxima: {nearest_expiration_date}\n"
+            f"Empresa com maior quantidade de produtos "
+            f"estocados: {quantidadeProdutos}\n"
+        )
 
 
 with open("./inventory_report/data/inventory.json") as file:
     result = file.read()
-    content = json.loads(result)
+    lista = json.loads(result)
 
-    print(content[0])
-# from datetime import date
-# >>> date.fromisoformat('2019-12-04')
-# datetime.date(2019, 12, 4)
+
+print(SimpleReport.generate(lista))
