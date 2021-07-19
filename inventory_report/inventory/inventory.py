@@ -9,16 +9,16 @@ class Inventory:
     @classmethod
     def import_data(cls, path, mode):
         if path.endswith(".csv"):
-            file_content = cls.read_csv(path)
+            content = cls.read_csv(path)
         if path.endswith(".json"):
-            file_content = cls.read_json(path)
+            content = cls.read_json(path)
         if path.endswith(".xml"):
-            file_content = cls.read_xml(path)
+            content = cls.read_xml(path)
         if mode == "simples":
-            file_content = SimpleReport.generate(file_content)
+            content = SimpleReport.generate(content)
         else:
-            file_content = CompleteReport.generate(file_content)
-        return file_content
+            content = CompleteReport.generate(content)
+        return content
 
     @classmethod
     def read_csv(cls, path):
