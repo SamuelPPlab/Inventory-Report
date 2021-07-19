@@ -13,4 +13,9 @@ class Report(ABC):
         return [datetime.strptime(item[key], format) for item in data]
 
     def count_occurrences(data: list[dict]) -> list[dict]:
-        return [(category, data.count(category)) for category in data]
+        items = []
+        for item in data:
+            element = (item, data.count(item))
+            if element not in items:
+                items.append(element)
+        return items
