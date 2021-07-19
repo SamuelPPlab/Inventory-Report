@@ -5,7 +5,6 @@ class SimpleReport:
     def generate(lista_empresas):
         datas_de_validade = []
         empresas = [empresa["nome_da_empresa"] for empresa in lista_empresas]
-        print(empresas)
         qtd = max(set(empresas), key=empresas.count)
         data_de_fabricacao = min(
             list(
