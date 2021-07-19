@@ -15,8 +15,6 @@ class CompleteReport:
         lista_estoque_das_empresas = list(estoque_das_empresas.items())
         resultado_estoque_das_empresas = "\nProdutos estocados por empresa: \n"
 
-        print(resultado_estoque_das_empresas)
-
         for empresa in lista_estoque_das_empresas:
             nova_empresa = f"- {empresa[0]}: {empresa[1]}\n"
             resultado_estoque_das_empresas = (
