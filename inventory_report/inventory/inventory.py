@@ -1,7 +1,7 @@
 from csv import DictReader
+import xmltodict
 from inventory_report.reports.complete_report import CompleteReport
 from inventory_report.reports.simple_report import SimpleReport
-import xmltodict
 from json import load
 
 
@@ -26,6 +26,4 @@ class Inventory:
             if report_type == 'simples':
                 return SimpleReport.generate(content_dict)
             else:
-                report_type == 'completo'
                 return CompleteReport.generate(content_dict)
-            return None
