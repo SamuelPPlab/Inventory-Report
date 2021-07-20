@@ -1,29 +1,24 @@
 from inventory_report.reports.simple_report import SimpleReport
+from collections import Counter
 
 
-class CompleteReport(SimpleReport):
-    @staticmethod
+class CompleteReport:
+    def __init__(self, data):
+        self.data = data
+
     def generate(data):
-        report_data = []
-        [
-            report_data.append(company["nome_da_empresa"])
-            for company in data
-            if company["nome_da_empresa"] not in report_data
-        ]
+        itemList = []
+        for item in data:
+            itemList.append(item['nome_da_empresa'])
 
-        company_stock = {}
-        for product in report_data:
-            company_stock[product] = 0
+        commonList = Counter(itemList)
+        finalResultList = ['Produtos estocados por empresa: ']
+        for element in commonList:
+            finalResultList.append(
+                f"- {'%s: %d' % (element, commonList[element])}"
+            )
+        finalResult = '\n'.join(finalResultList)
 
-        for item in report_data:
-            company_stock[item["nome_da_empresa"]] += 1
-
-        products = "Produtos estocados por empresa: \n"
-
-        for company, quantity in company_stock.items():
-            products += f"- {company}: {quantity}\n"
-
-        return (
-          f"{SimpleReport.generate(data)}\n"
-          f"{products}"
-        )
+        return f"""{SimpleReport.generate(data)}
+{finalResult}
+"""
