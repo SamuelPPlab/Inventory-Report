@@ -7,7 +7,6 @@ import json
 # https://docs.python.org/pt-br/3/library/xml.etree.elementtree.html
 import xml.etree.ElementTree as ET
 
-
 class Inventory:
     @classmethod
     def import_data(cls, file_path, report_type):
