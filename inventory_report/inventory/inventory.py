@@ -1,4 +1,5 @@
 import json
+import xmltodict
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 from csv import reader
@@ -45,7 +46,12 @@ def json_importer(file_path):
 
 
 def xml_importer(file_path):
-    return file_path
+    with open(file_path, 'r') as xml_file:
+        content = xml_file.read()
+        d = xmltodict.parse(content)
+        group = [dict(i) for i in d['dataset']['record']]
+
+    return group
 
 
 def inv_lst_converter(rows):
