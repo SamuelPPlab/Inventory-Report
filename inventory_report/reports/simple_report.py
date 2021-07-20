@@ -4,29 +4,29 @@ import json
 
 class SimpleReport:
     def generate(lista):
-        listas_empresas = lista
+        lista_empresas = lista
 
-        quantidadeProdutos = max(
-            [item["nome_da_empresa"] for item in listas_empresas]
+        quantidade_produtos = max(
+            [item["nome_da_empresa"] for item in lista_empresas]
         )
 
         current_time = datetime.today().strftime("%Y-%m-%d")
 
         nearest_expiration_date = min(
             data["data_de_validade"]
-            for data in listas_empresas
+            for data in lista_empresas
             if data["data_de_validade"] > current_time
         )
 
         oldest_date = min(
-            data["data_de_fabricacao"] for data in listas_empresas
+            data["data_de_fabricacao"] for data in lista_empresas
         )
 
         return (
             f"Data de fabricação mais antiga: {oldest_date}\n"
             f"Data de validade mais próxima: {nearest_expiration_date}\n"
             f"Empresa com maior quantidade de produtos "
-            f"estocados: {quantidadeProdutos}\n"
+            f"estocados: {quantidade_produtos}\n"
         )
 
 
@@ -35,4 +35,4 @@ with open("./inventory_report/data/inventory.json") as file:
     lista = json.loads(result)
 
 
-print(SimpleReport.generate(lista))
+# print(SimpleReport.generate(lista))
