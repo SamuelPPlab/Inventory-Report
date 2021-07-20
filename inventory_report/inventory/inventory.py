@@ -1,3 +1,4 @@
+import json
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 from csv import reader
@@ -8,15 +9,43 @@ class Inventory:
         pass
 
     def import_data(file_path, report_type):
-        with open(file_path, 'r') as csv_file:
-            csv_reader = reader(csv_file, delimiter=',')
-            list_of_rows = list(csv_reader)
-            inv_report = inv_lst_converter(list_of_rows)
+        inv_report = define_importer(file_path)
 
         if report_type == 'simples':
             return SimpleReport.generate(inv_report)
         elif report_type == 'completo':
             return CompleteReport.generate(inv_report)
+
+
+def define_importer(file_path):
+    inv_report = ""
+    file_extension = file_path.split(".")[1]
+
+    if file_extension == 'csv':
+        inv_report = csv_importer(file_path)
+    elif file_extension == 'json':
+        inv_report = json_importer(file_path)
+    elif file_extension == 'xml':
+        inv_report = xml_importer(file_path)
+    return inv_report
+
+
+def csv_importer(file_path):
+    with open(file_path, 'r') as csv_file:
+        csv_reader = reader(csv_file, delimiter=',')
+        list_of_rows = list(csv_reader)
+        inv_report = inv_lst_converter(list_of_rows)
+    return inv_report
+
+
+def json_importer(file_path):
+    with open(file_path, 'r') as json_file:
+        inv_report = json.load(json_file)
+    return inv_report
+
+
+def xml_importer(file_path):
+    return file_path
 
 
 def inv_lst_converter(rows):
