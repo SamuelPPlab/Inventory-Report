@@ -19,6 +19,7 @@ class Inventory:
                 list = json.load(file)
             return Generate_Report.generate(list, report_type)
 
+
 class Generate_Report:
     def generate(list, report_type):
         if report_type == "simples":
