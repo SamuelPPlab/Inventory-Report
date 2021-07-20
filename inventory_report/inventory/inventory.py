@@ -1,11 +1,11 @@
-from inventory_report.reports.simple_report import SimpleReport
-from inventory_report.reports.complete_report import CompleteReport
-import csv
+# from inventory_report.reports.simple_report import SimpleReport
+# from inventory_report.reports.complete_report import CompleteReport
+# import csv
 
 
-class Inventory:
-    def import_data(cls, file_path):
-        report_simple = SimpleReport.generate(file_path)
+# class Inventory:
+#     def import_data(cls, file_path):
+#         report_simple = SimpleReport.generate(file_path)
 
 
 # with open("./inventory_report/data/inventory.csv") as file:
