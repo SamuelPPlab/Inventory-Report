@@ -6,7 +6,7 @@ import xmltodict
 
 
 class Inventory:
-    def carregar_extensao(path, content):
+    def load_by_extension(path, content):
         if path.endswith(".csv"):
             return list(DictReader(content))
         elif path.endswith(".json"):
@@ -24,9 +24,9 @@ class Inventory:
         with open(path, mode="r") as conteudo:
             if report_type == "simples":
                 return SimpleReport.generate(
-                    Inventory.carregar_extensao(path, conteudo)
+                    Inventory.load_by_extension(path, conteudo)
                 )
             else:
                 return CompleteReport.generate(
-                    Inventory.carregar_extensao(path, conteudo)
+                    Inventory.load_by_extension(path, conteudo)
                 )
