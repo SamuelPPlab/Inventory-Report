@@ -13,8 +13,8 @@ class SimpleReport:
         valid_date = calculate_min_validation_date(inv_products)
         company = most_inventory_company(inv_products)
         final_report = (f"""Data de fabricação mais antiga: {fabrication}
-    Data de validade mais próxima: {valid_date}
-    Empresa com maior quantidade de produtos estocados: {company}\n""")
+Data de validade mais próxima: {valid_date}
+Empresa com maior quantidade de produtos estocados: {company}\n""")
         return final_report
 
 
