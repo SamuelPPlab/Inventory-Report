@@ -1,14 +1,24 @@
 from statistics import mode
+from datetime import datetime
 
 
 class SimpleReport:
+    def menor_data(string_date):
+        data = datetime.strptime(string_date, "%Y-%m-%d")
+        atual = datetime.now()
+        if data < atual:
+            return False
+        return True
+
     def generate(data):
         data_fabricacao_mais_antiga = min(
-            list(map(lambda x: x["data_de_validade"], data))
+            map(lambda x: x["data_de_fabricacao"], data)
         )
 
         validade_mais_proxima = min(
-             list(map(lambda x: x["data_de_validade"], data))
+            item["data_de_validade"]
+            for item in data
+            if SimpleReport.menor_data(item["data_de_validade"])
         )
 
         empresa_com_maior_estoque = mode(
