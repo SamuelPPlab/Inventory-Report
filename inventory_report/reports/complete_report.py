@@ -4,8 +4,8 @@ from collections import Counter
 
 
 class CompleteReport(SimpleReport):
-    @classmethod
-    def generate(cls, product_inventory):
+    @staticmethod
+    def generate(product_inventory):
         simple_report = SimpleReport.generate(product_inventory)
         companys = [
           company["nome_da_empresa"] for company in product_inventory

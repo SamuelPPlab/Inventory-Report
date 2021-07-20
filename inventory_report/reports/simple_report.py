@@ -4,8 +4,8 @@ from statistics import mode
 
 
 class SimpleReport:
-    @classmethod
-    def generate(self, product_inventory):
+    @staticmethod
+    def generate(product_inventory):
         older_fabrication = min(
           build_date["data_de_fabricacao"]
           for build_date in product_inventory

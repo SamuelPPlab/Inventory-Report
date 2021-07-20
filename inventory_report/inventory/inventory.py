@@ -25,20 +25,20 @@ class Inventory:
 
         return report
 
-    @classmethod
-    def read_file_csv(cls, file_path):
+    @staticmethod
+    def read_file_csv(file_path):
         with open(file_path) as file_csv:
             file = csv.DictReader(file_csv)
             return list(file)
 
-    @classmethod
-    def read_file_json(cls, file_path):
+    @staticmethod
+    def read_file_json(file_path):
         with open(file_path) as file_json:
             file = json.load(file_json)
             return file
 
-    @classmethod
-    def read_file_xml(cls, file_path):
+    @staticmethod
+    def read_file_xml(file_path):
         root = ET.parse(file_path).getroot()
         file = []
         for child in root:
