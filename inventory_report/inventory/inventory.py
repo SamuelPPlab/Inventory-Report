@@ -56,3 +56,5 @@ class Inventory:
 
         if type == "completo":
             return CompleteReport.generate(inventory)
+
+
