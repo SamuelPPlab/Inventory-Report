@@ -1,17 +1,26 @@
-import statistics
 from statistics import mode
+from datetime import datetime
 
 
 class SimpleReport:
-    def generate(data):
-        initial_date = [atribute["data_de_fabricacao"] for atribute in data]
-        final_date = [atribute["data_de_validade"] for atribute in data]
-        company = [atribute["nome_da_empresa" ] for atribute in data]
+    def verify_date(date_string):
+        date_today = datetime.today()
+        date_number = datetime.strptime(date_string, "%Y-%m-%d")
+        return date_number > date_today
+
+    def generate(item):
+        company = [attribute["nome_da_empresa"] for attribute in item]
+        initial_date = [attribute["data_de_fabricacao"] for attribute in item]
+        final_date = [
+            attribute["data_de_validade"] for attribute in item
+            if SimpleReport.verify_date(attribute["data_de_validade"])
+        ]
 
         format = (
             f"Data de fabricação mais antiga: {min(initial_date)}\n"
-            f"Data de validade mais próxima: {max(final_date)}\n" # esse aqui tá errado :(
-            f"Empresa com maior quantidade de produtos estocados: {mode(company)}\n"
+            f"Data de validade mais próxima: {min(final_date)}\n"
+            f"Empresa com maior quantidade de produtos estocados: "
+            f"{mode(company)}\n"
         )
 
         return format
