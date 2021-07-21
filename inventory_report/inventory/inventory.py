@@ -41,7 +41,7 @@ class Inventory:
         elif path.endswith("json"):
             list_products = cls.reader_json(path)
         elif path.endswith('xml'):
-            list_products = cls.reade_rxml(path)
+            list_products = cls.reader_xml(path)
 
         if type_report == "simples":
             report = SimpleReport.generate(list_products)

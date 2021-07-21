@@ -1,4 +1,7 @@
-class InventoryIterartor:
+import inventory
+
+
+class InventoryIterartor(inventory):
     def __iter__(self):
         pass
 
