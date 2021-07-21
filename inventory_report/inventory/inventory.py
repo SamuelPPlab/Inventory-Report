@@ -43,8 +43,10 @@ class Inventory:
         elif document_type == "xml":
             report_list = Inventory.read_xml(report_path)
 
+        else:
+            raise ValueError("Arquivo inválido")
+
         if report_type == "simples":
-            # print(f"Igual a {report_list}")
             return SimpleReport.generate(report_list)
         else:
             return CompleteReport.generate(report_list)
