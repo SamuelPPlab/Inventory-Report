@@ -15,6 +15,7 @@ class Inventory():
             result = cls.show_json(cls, path, report_type)
             return result
         elif (file_type == 'xml'):
+            result = cls.show_xml(cls, path, report_type)
             return print('hj nao')
         else:
             raise ValueError('Xablau is not iterable')
@@ -35,6 +36,15 @@ class Inventory():
     @staticmethod
     def show_json(cls, path, report_type):
         dictionary = cls.json_reader(path)
+        if (report_type == 'simples'):
+            result = SimpleReport.generate(dictionary)
+        elif (report_type == 'completo'):
+            result = CompleteReport.generate(dictionary)
+        return result
+
+    @staticmethod
+    def show_xml(cls, path, report_type):
+        dictionary = cls.xml_reader(path)
         if (report_type == 'simples'):
             result = SimpleReport.generate(dictionary)
         elif (report_type == 'completo'):
@@ -66,6 +76,11 @@ class Inventory():
         dict = json.loads(data)
         return dict
 
+    @staticmethod
+    def xml_reader(path):
+        with open(path, 'r') as xmlfile:
+            data = xmlfile.read()
+        print(data)        
 
 if __name__ == '__main__':
     teste = [
@@ -106,4 +121,4 @@ if __name__ == '__main__':
             "instrucoes_de_armazenamento": "velit eu est congue elementum",
         },
     ]
-    Inventory.import_data('inventory_report/data/inventory.json', 'simples')
+    Inventory.import_data('inventory_report/data/inventory.xml', 'simples')
