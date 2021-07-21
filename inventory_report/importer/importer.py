@@ -1,1 +1,7 @@
-print("Olá Python")
+from abc import abstractmethod, ABC
+
+
+class Importer(ABC):
+    @abstractmethod
+    def import_data(path):
+        pass
