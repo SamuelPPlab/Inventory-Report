@@ -17,12 +17,9 @@ def decode(type, data):
             return data_csv
     elif type == 'xml':
         with open(data) as xml_file:
-            # data_xml = xml_file.read()
-            # bs_data_xml = BeautifulSoup(data_xml, "xml")
+            teste = xml_file.read()
             parser = XMLtoDict()
-            # dict_xml = ET.parse(data)
-            # root = dict_xml.getroot()
-            response = parser.value_from_nest('record', xml_file)
+            response = parser.value_from_nest('.*ecord', teste)
             return response
     else:
         with open(data) as file:
