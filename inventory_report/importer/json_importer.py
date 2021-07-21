@@ -6,5 +6,8 @@ class JsonImporter(Importer):
 
     @classmethod
     def import_data(path):
-        with open(path) as file:
-            return json.load(file)
+        if (path.endswith('.json')):
+            with open(path) as file:
+                return json.load(file)
+        else:
+            raise Exception('Arquivo incorreto')
