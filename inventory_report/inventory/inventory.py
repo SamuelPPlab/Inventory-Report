@@ -33,7 +33,3 @@ class Inventory():
         if report_type == 'simples':
             return SimpleReport.generate(data)
         return CompleteReport.generate(data)
-
-
-# response = Inventory.import_data('inventory_report/data/inventory.xml', 'completa')
-# print(response)
