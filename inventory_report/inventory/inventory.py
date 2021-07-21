@@ -1,32 +1,40 @@
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
-import xmltodict
-from csv import DictReader
-from json import load
+import csv
+import json
 
 
 class Inventory:
 
-    def load_by_extension(path, content):
-        if path.endswith('.csv'):
-            return list(DictReader(content))
-        elif path.endswith('.json'):
-            return load(content)
-        elif path.endswith('.xml'):
-            xml_orderedDict = xmltodict.parse(content.read())
-            records = xml_orderedDict['dataset']['record']
-            return [
-                dict(product)
-                for product
-                in records
-            ]
+    def csv_reader(path):
+        with open(path, mode='r') as file: 
+            content = csv.DictReader(file, delimeter=",", quotechar='"')
+            products_list = [row for row in content]
+            print("CSV", products_list[0])
+            return products_list
 
-    def import_data(path, report_type):
-        with open(path, mode='r') as content:
-            content_dict = Inventory.load_by_extension(path, content)
+    def json_reader(path):
+        with open(path, mode='r') as file:
+            content = json.load(file)
+            print("JSON", content[0])
+            return content
 
-            if report_type == 'simples':
-                return SimpleReport.generate(content_dict)
-            elif report_type == 'completo':
-                return CompleteReport.generate(content_dict)
-            return None
+    @classmethod
+    def import_data(cls, path, type_report):
+        products_list = list()
+        if path.endswith("csv"):
+            products_list = cls.csv_reader(path)
+        elif path.endswith("json"):
+            products_list = cls.json_reade(path)
+
+        if type_report == "simples":
+            report = SimpleReport.generate(products_list)
+            return report
+        else:
+            report = CompleteReport.generate(products_list)
+            return report
+
+
+if __name__ == "__main__":
+    inventory = Inventory()
+    inventory.import_data("data/inventory.json", "simples")
