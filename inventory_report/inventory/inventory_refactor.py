@@ -23,6 +23,6 @@ class InventoryRefactor:
         self.data.extend(self.importer.import_data(file_name))
 
     def import_report(self, report_type) -> Report:
-        if report_type == ReportType.COMPLETE:
+        if report_type == "completo":
             return CompleteReport.generate(self.data)
         return SimpleReport.generate(self.data)
