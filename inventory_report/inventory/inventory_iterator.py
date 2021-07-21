@@ -11,5 +11,3 @@ class InventoryIterator(Iterator):
         if self.index > len(self.iter):
             raise StopIteration()
         return self.iter[self.index - 1]
-
-
