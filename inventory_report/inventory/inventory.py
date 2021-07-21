@@ -1,12 +1,40 @@
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import csv
+import json
 
 
 class Inventory():
     @classmethod
     def import_data(cls, path, report_type):
+        file_type = cls.check_file_type_in_path(path)
+        if (file_type == 'csv'):
+            result = cls.show_csv(cls, path, report_type)
+            return result
+        elif (file_type == 'json'):
+            result = cls.show_json(cls, path, report_type)
+            return result
+        elif (file_type == 'xml'):
+            return print('hj nao')
+        else:
+            raise ValueError('Xablau is not iterable')
+
+    @staticmethod
+    def check_file_type_in_path(path):
+        return path.split('.')[1]
+
+    @staticmethod
+    def show_csv(cls, path, report_type):
         dictionary = cls.csv_reader(path)
+        if (report_type == 'simples'):
+            result = SimpleReport.generate(dictionary)
+        elif (report_type == 'completo'):
+            result = CompleteReport.generate(dictionary)
+        return result
+
+    @staticmethod
+    def show_json(cls, path, report_type):
+        dictionary = cls.json_reader(path)
         if (report_type == 'simples'):
             result = SimpleReport.generate(dictionary)
         elif (report_type == 'completo'):
@@ -30,6 +58,13 @@ class Inventory():
                         'instrucoes_de_armazenamento'],
                 })
             return lista
+
+    @staticmethod
+    def json_reader(path):
+        with open(path, 'r') as jsonfile:
+            data = jsonfile.read()
+        dict = json.loads(data)
+        return dict
 
 
 if __name__ == '__main__':
@@ -71,4 +106,4 @@ if __name__ == '__main__':
             "instrucoes_de_armazenamento": "velit eu est congue elementum",
         },
     ]
-    Inventory.import_data('inventory_report/data/inventory.csv', 'simples')
+    Inventory.import_data('inventory_report/data/inventory.json', 'simples')
