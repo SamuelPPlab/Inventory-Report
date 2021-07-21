@@ -1,41 +1,62 @@
 import csv
 import json
+import xml.etree.ElementTree as ET
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 
-import pprint
-
 
 class Inventory:
-    def import_data(file_path, report_type):
-        file_name, file_type = file_path.split(".")
-        print(file_type)
-
+    @staticmethod
+    def import_file(file_path):
+        file_type = file_path.split(".")[-1]
         if file_type == "csv":
-            with open(file_path) as file:
-                dict_from_file = [
-                    {header: row_value for header, row_value in row.items()}
-                    for row in csv.DictReader(file, skipinitialspace=True)
-                ]
-                # https://stackoverflow.com/questions/21572175/convert-csv-file-to-list-of-dictionaries
+            return Inventory.import_csv(file_path)
         elif file_type == "json":
-            with open(file_path) as file:
-                dict_from_file = json.load(file)
+            return Inventory.import_json(file_path)
+        elif file_type == "xml":
+            return Inventory.import_xml(file_path)
         else:
-            dict_from_file = []
+            return []
 
+    @staticmethod
+    def import_csv(file_path):
+        with open(file_path) as file:
+            dict_from_csv = [
+                {header: row_value for header, row_value in row.items()}
+                for row in csv.DictReader(file, skipinitialspace=True)
+            ]
+            # https://stackoverflow.com/questions/21572175/convert-csv-file-to-list-of-dictionaries
+        return dict_from_csv
+
+    @staticmethod
+    def import_json(file_path):
+        with open(file_path) as file:
+            return json.load(file)
+
+    @staticmethod
+    def import_xml(file_path):
+        tree = ET.parse(file_path)
+        root = tree.getroot()
+        records = list(root)
+        elements = [list(record) for record in records]
+        dict_from_xml = [
+            {item.tag: item.text for item in element} for element in elements
+        ]
+        return dict_from_xml
+
+    @staticmethod
+    def generate_report(data_dict, report_type):
         if report_type == "simples":
-            report = SimpleReport.generate(dict_from_file)
+            return SimpleReport.generate(data_dict)
         elif report_type == "completo":
-            report = CompleteReport.generate(dict_from_file)
+            return CompleteReport.generate(data_dict)
         else:
             raise ValueError(
                 "O tipo de relatório deve ser 'simples' ou 'completo'"
             )
+
+    @staticmethod
+    def import_data(file_path, report_type):
+        data_dict = Inventory.import_file(file_path)
+        report = Inventory.generate_report(data_dict, report_type)
         return report
-        # return dict_from_file
-
-
-pprint.pprint(
-    Inventory.import_data("inventory_report/data/inventory.json", "simples")
-)
