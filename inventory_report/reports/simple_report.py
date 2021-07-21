@@ -13,7 +13,6 @@ class SimpleReport:
             [date for date in validation_date if date > today]
         )
         stock = max(enterprises, key=enterprises.count)
-        print('| TESTE: %s' % oldest_date)
         return (
             f"Data de fabricação mais antiga: {oldest_date}\n"
             f"Data de validade mais próxima: {closest_validate}\n"
