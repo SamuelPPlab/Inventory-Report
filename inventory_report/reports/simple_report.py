@@ -27,7 +27,7 @@ class SimpleReport:
             if data < mais_antigo:
                 mais_antigo = data
 
-        validadeMaisProxima = list(map(cls.findRecentDate, dictionary))        
+        validadeMaisProxima = list(map(cls.findRecentDate, dictionary))
         data_atual = datetime.now().date()
         acumulador_mais_recente = validadeMaisProxima[0] - data_atual
         mais_recente = validadeMaisProxima[0]

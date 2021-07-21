@@ -20,7 +20,7 @@ class Inventory():
             lista = []
             for row in reader:
                 lista.append({
-                    'id': row['id'], 
+                    'id': row['id'],
                     'nome_do_produto': row['nome_do_produto'],
                     "nome_da_empresa": row['nome_da_empresa'],
                     "data_de_fabricacao": row['data_de_fabricacao'],
