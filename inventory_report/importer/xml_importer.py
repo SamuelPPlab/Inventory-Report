@@ -13,6 +13,7 @@ class XmlImporter(Importer):
                     group = [dict(i) for i in d['dataset']['record']]
                 return group
             else:
-                raise ValueError
+                raise ValueError('Arquivo inválido')
         except ValueError:
-            return 'Arquivo inválido'
+            print('Arquivo inválido')
+            raise

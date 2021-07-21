@@ -13,9 +13,10 @@ class CsvImporter(Importer):
                     inv_report = inv_lst_converter(list_of_rows)
                 return inv_report
             else:
-                raise ValueError
+                raise ValueError('Arquivo inválido')
         except ValueError:
-            return 'Arquivo inválido'
+            print('Arquivo inválido')
+            raise
 
 
 def inv_lst_converter(rows):

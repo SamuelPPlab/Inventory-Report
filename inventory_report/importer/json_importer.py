@@ -11,6 +11,7 @@ class JsonImporter(Importer):
                     inv_report = json.load(json_file)
                 return inv_report
             else:
-                raise ValueError
+                raise ValueError('Arquivo inválido')
         except ValueError:
-            return 'Arquivo inválido'
+            print('Arquivo inválido')
+            raise
