@@ -1,17 +1,28 @@
-from inventory_report.reports.simple_report2 import SimpleReport
-from collections import Counter
+from datetime import date
+from statistics import mode
 
 
-class CompleteReport(SimpleReport):
+class SimpleReport:
+
     @classmethod
-    def generate(self, item):
-        qtd_produtos_empresa = dict(
-            Counter(data["nome_da_empresa"] for data in item)
+    def generate(self, lista):
+        hoje = str(date.today())
+        data_fab_antiga = min(
+            map(lambda data: data["data_de_fabricacao"], lista)
         )
-        nova_variavel = ""
-        for key, value in qtd_produtos_empresa.items():
-            nova_variavel += f"- {key}: {value}\n"
-        return "Produtos estocados por empresa:\n" f"{nova_variavel}"
+        print(data_fab_antiga)
+        validade_proxima = min(
+            data["data_de_validade"]
+            for data in lista
+            if data["data_de_validade"] > hoje
+        )
+        maior_estoque = mode(list(data["nome_da_empresa"] for data in lista))
+        return (
+            f"Data de fabricação mais antiga: {data_fab_antiga}\n"
+            f"Data de validade mais próxima: {validade_proxima}\n"
+            "Empresa com maior quantidade de produtos"
+            f"estocados: {maior_estoque}\n"
+        )
 
 
 # stock = [
@@ -53,4 +64,4 @@ class CompleteReport(SimpleReport):
 #     },
 # ]
 
-# print(CompleteReport.generate(stock))
+# print(SimpleReport.generate(stock))
