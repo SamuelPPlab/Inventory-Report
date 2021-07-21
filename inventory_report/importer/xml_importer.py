@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 class XmlImporter(Importer):
 
     @classmethod
-    def import_data(path):
+    def import_data(self, path):
         if (path.endswith('.xml')):
             tree = ET.parse(path)
             root = tree.getroot()
@@ -20,4 +20,4 @@ class XmlImporter(Importer):
                 root))
             return lista
         else:
-            raise Exception('Arquivo incorreto')
+            raise ValueError("Arquivo inválido")
