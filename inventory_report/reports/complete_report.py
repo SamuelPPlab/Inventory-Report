@@ -3,7 +3,6 @@ from collections import Counter
 
 
 class CompleteReport:
-
     def generate(data):
         manufactoring_date = sorted(
             data, key=lambda data: data["data_de_fabricacao"]
