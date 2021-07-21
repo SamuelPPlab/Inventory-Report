@@ -10,7 +10,7 @@ class CsvImporter(Importer):
         with open(path, mode="r") as file:
             content = csv.DictReader(file, delimiter=",", quotechar='"')
             list_products = [row for row in content]
-            print("CSV", list_products[0])
+            # print("CSV", list_products[0])
             return list_products
 
 

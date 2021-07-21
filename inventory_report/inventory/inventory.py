@@ -52,4 +52,4 @@ class Inventory:
 
 if __name__ == "__main__":
     inventory = Inventory()
-    # inventory.import_data("inventory_report/data/inventory.xml", "simples")
+    inventory.import_data("inventory_report/data/inventory.xml", "simples")
