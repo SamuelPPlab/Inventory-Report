@@ -6,14 +6,14 @@ import json
 
 class Inventory:
 
-    def csv_reader(path):
+    def reader_csv(path):
         with open(path, mode="r") as file:
-            content = csv.DictReader(file, delimeter=",", quotechar='"')
-            products_list = [row for row in content]
-            print("CSV", products_list[0])
-            return products_list
+            content = csv.DictReader(file, delimiter=",", quotechar='"')
+            list_products = [row for row in content]
+            print("CSV", list_products[0])
+            return list_products
 
-    def json_reader(path):
+    def reader_json(path):
         with open(path, mode="r") as file:
             content = json.load(file)
             print("JSON", content[0])
@@ -21,17 +21,17 @@ class Inventory:
 
     @classmethod
     def import_data(cls, path, type_report):
-        products_list = list()
+        list_products = list()
         if path.endswith("csv"):
-            products_list = cls.csv_reader(path)
+            list_products = cls.reader_csv(path)
         elif path.endswith("json"):
-            products_list = cls.json_reader(path)
+            list_products = cls.reader_json(path)
 
         if type_report == "simples":
-            report = SimpleReport.generate(products_list)
+            report = SimpleReport.generate(list_products)
             return report
         else:
-            report = CompleteReport.generate(products_list)
+            report = CompleteReport.generate(list_products)
             return report
 
 
