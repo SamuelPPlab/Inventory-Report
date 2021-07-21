@@ -4,6 +4,7 @@ import csv
 import json
 import xml.etree.ElementTree as ET
 
+
 class Generate_Report:
     def generate(lista, tipo_de_relatorio):
         if tipo_de_relatorio == "simples":
@@ -47,4 +48,4 @@ class Inventory:
                 tree = ET.parse(arquivo)
                 data = tree.getroot()
             lista = Serialize.xml_to_list(data)
-            return Generate_Report.generate(lista, tipo_de_relatorio)
+            return Generate_Report.generate(lista, tipo_de_relatorio)]
