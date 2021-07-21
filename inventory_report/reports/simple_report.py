@@ -10,7 +10,6 @@ class SimpleReport:
         data_fab_antiga = min(
             map(lambda data: data["data_de_fabricacao"], lista)
         )
-        print(data_fab_antiga)
         validade_proxima = min(
             data["data_de_validade"]
             for data in lista
