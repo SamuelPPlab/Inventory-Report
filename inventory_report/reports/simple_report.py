@@ -36,7 +36,7 @@ class SimpleReport:
         dic_de_empresas = sorted(
             dic_de_empresas.items(), key=lambda x: x[1], reverse=True
         )
-        result = (
+        resultado = (
             "Data de fabricação mais antiga: "
             + f"{data_de_fabricacao_mais_antiga}\n"
             "Data de validade mais próxima: "
@@ -45,4 +45,4 @@ class SimpleReport:
             + f"{dic_de_empresas[0][0]}\n"
         )
 
-        return result
+        return resultado
