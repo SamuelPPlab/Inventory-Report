@@ -3,7 +3,8 @@ from collections import Counter
 
 
 class SimpleReport:
-    def generate(data):
+    @classmethod
+    def generate(cls, data):
         olderFab = date.today()
         today = date.today()
         daysToExp = 0

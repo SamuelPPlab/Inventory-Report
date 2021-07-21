@@ -1,5 +1,7 @@
 import json
-import pathlib, xmltodict, ast
+import pathlib
+import xmltodict
+import ast
 from csv import DictReader
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
@@ -10,9 +12,10 @@ class Inventory:
         self.file = receive_file
         self.report_type = report_type
 
-    def import_data(receive_file, report_type):
+    @classmethod
+    def read_extension_file(cls, file_to_read):
         data = []
-        with open(receive_file, 'r') as file:
+        with open(file_to_read, 'r') as file:
             if pathlib.Path(file.name).suffix == '.json':
                 data = json.load(file)
             elif pathlib.Path(file.name).suffix == '.csv':
@@ -24,6 +27,11 @@ class Inventory:
                 xmlToJSON = json.dumps(xmlReader)
                 xmlDict = ast.literal_eval(xmlToJSON)['dataset']['record']
                 data = xmlDict
+        return data
+
+    @classmethod
+    def import_data(cls, receive_file, report_type):
+        data = cls.read_extension_file(receive_file)
 
         if report_type == 'simples':
             return SimpleReport.generate(data)
