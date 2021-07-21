@@ -23,7 +23,3 @@ class CsvImporter(Importer):
             return lista
         else:
             raise ValueError("Arquivo inválido")
-
-
-if __name__ == '__main__':
-    print(CsvImporter.import_data("inventory_report/data/inventory.csv"))
