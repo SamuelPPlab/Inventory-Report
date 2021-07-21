@@ -35,5 +35,5 @@ class Inventory():
         return CompleteReport.generate(data)
 
 
-response = Inventory.import_data('inventory_report/data/inventory.xml', 'completa')
-print(response)
+# response = Inventory.import_data('inventory_report/data/inventory.xml', 'completa')
+# print(response)
