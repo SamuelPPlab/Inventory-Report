@@ -55,4 +55,4 @@ class Inventory:
             return retorno
 
 
-print(Inventory.import_data("./inventory_report/data/inventory.xml", "completo"))
+# print(Inventory.import_data("./inventory_report/data/inventory.xml", "completo"))
