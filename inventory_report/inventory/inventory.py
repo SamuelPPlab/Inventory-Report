@@ -45,7 +45,7 @@ class Inventory:
                     header[5]: produto[5],
                     header[6]: produto[6]},
                     data))
-        
+
         # trabalhando com a lista:
         if modo == "simples":
             retorno = SimpleReport.generate(lista)
@@ -53,6 +53,3 @@ class Inventory:
         if modo == "completo":
             retorno = CompleteReport.generate(lista)
             return retorno
-
-
-# print(Inventory.import_data("./inventory_report/data/inventory.xml", "completo"))
