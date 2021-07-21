@@ -8,7 +8,7 @@ class CsvImporter(Importer):
         file_type = cls.check_file_type_in_path(path)
         if file_type == "csv":
             with open(path, newline="") as csvfile:
-                reader = csv.DictReader(csvfile)
+                reader = list(csv.DictReader(csvfile))
         else:
             raise ValueError("Arquivo inválido")
         return reader
