@@ -2,6 +2,7 @@ from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import csv
 import json
+import xml.etree.ElementTree as ET
 
 
 class Inventory:
@@ -16,6 +17,18 @@ class Inventory:
                 lista = json.load(file)
 
         # logica XML
+        elif (path.endswith('.xml')):
+            tree = ET.parse(path)
+            root = tree.getroot()
+            lista = list(map(lambda produto: {
+                "id": produto[0].text,
+                "nome_do_produto": produto[1].text,
+                "nome_da_empresa": produto[2].text,
+                "data_de_fabricacao": produto[3].text,
+                "data_de_validade": produto[4].text,
+                "numero_de_serie": produto[5].text,
+                "instrucoes_de_armazenamento": produto[6].text},
+                root))
 
         # logica CSV
         else:
@@ -42,4 +55,4 @@ class Inventory:
             return retorno
 
 
-print(Inventory.import_data("./inventory_report/data/inventory.json", "completo"))
+print(Inventory.import_data("./inventory_report/data/inventory.xml", "completo"))
