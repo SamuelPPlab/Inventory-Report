@@ -2,7 +2,7 @@ from inventory_report.importer.importer import Importer
 import json
 
 
-class CsvImporter(Importer):
+class JsonImporter(Importer):
     @classmethod
     def import_data(cls, path):
         file_type = cls.check_file_type_in_path(path)
