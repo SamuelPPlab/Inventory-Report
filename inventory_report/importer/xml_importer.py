@@ -4,7 +4,8 @@ import xml.etree.ElementTree as ET
 
 class XmlImporter(Importer):
     def import_data(path):
-        data = []
+        if not path.endswith("xml"):
+            raise ValueError("Arquivo inválido")
         tree = ET.parse(path)
         root = tree.getroot()
         list_products = [
@@ -16,5 +17,3 @@ class XmlImporter(Importer):
         ]
         print("XML", list_products[0])
         return list_products
-
-        return data
