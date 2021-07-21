@@ -10,3 +10,5 @@ class CsvImporter(Importer):
             inventory = csv.DictReader(file_csv)
             result = list(inventory)
         return result
+
+# easteregg
