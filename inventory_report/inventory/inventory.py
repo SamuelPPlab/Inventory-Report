@@ -38,3 +38,5 @@ class Inventory:
 if __name__ == "__main__":
     inventory = Inventory()
     inventory.import_data("data/inventory.json", "simples")
+
+    # teste
