@@ -1,33 +1,22 @@
-# from inventory_report.reports.simple_report import SimpleReport
+from abc import ABC
+from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import csv
 
 
-class Inventory(CompleteReport):
+class Inventory(ABC):
     @classmethod
     def import_data(cls, path, report_type):
-        # if (report_type == 'simples'):
-        #     result = SimpleReport.generate(dic)
-        # elif (report_type == 'composto'):
-        # result = CompleteReport.generate(dic)
-        dictionary = cls.csv_reader(path)
-        print(dictionary)
-        result = CompleteReport.generate(dictionary)        
-        # print(result)
-        # else:
-        #     raise ValueError('Xablau is not iterable')
-        # print(result)
-        # se report_type
-        # chamar o metodo de generate e salvar em uma variavel
-        # simnples = simpleReport.generate()
-        # composto = completeReport.generate()
+        dictionary = cls.csv_reader(path)        
+        if (report_type == 'simples'):
+            result = SimpleReport.generate(dictionary)
+        elif (report_type == 'completo'):
+            result = CompleteReport.generate(dictionary)
+        return result
 
     @staticmethod
     def csv_reader(path):
         with open(path, newline='') as csvfile:
-            # spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-            # for row in spamreader:
-            # print(', '.join(row))
             reader = csv.DictReader(csvfile)       
             lista = []
             for row in reader:
@@ -37,14 +26,10 @@ class Inventory(CompleteReport):
                     "nome_da_empresa": row['nome_da_empresa'],
                     "data_de_fabricacao": row['data_de_fabricacao'],
                     "data_de_validade": row['data_de_validade'],
-                    "numero_de_serie": row['data_de_validade'],
+                    "numero_de_serie": row['numero_de_serie'],
                     "instrucoes_de_armazenamento": row[
                         'instrucoes_de_armazenamento'],
                 })
-                # lista.append({row['nome_do_produto']})
-                # lista.append({row['nome_da_empresa']})
-                # lista.append({row['data_de_fabricacao']}
-                # lista.append({row['nome_da_empresa']})            
             return lista
 
 if __name__ == '__main__':
@@ -86,4 +71,4 @@ if __name__ == '__main__':
             "instrucoes_de_armazenamento": "velit eu est congue elementum",
         },
     ]
-    Inventory.import_data('inventory_report/data/inventory.csv', 'composto')
+    Inventory.import_data('inventory_report/data/inventory.csv', 'simples')
