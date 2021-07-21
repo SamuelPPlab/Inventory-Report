@@ -1,6 +1,6 @@
 from inventory_report.importer.importer import Importer
 import pathlib
-from xml import xmltodict
+import xmltodict
 import ast
 import json
 
