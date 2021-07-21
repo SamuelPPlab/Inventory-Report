@@ -21,13 +21,13 @@ class Inventory:
             tree = ET.parse(path)
             root = tree.getroot()
             lista = list(map(lambda produto: {
-                "id": produto[0].text,
-                "nome_do_produto": produto[1].text,
-                "nome_da_empresa": produto[2].text,
-                "data_de_fabricacao": produto[3].text,
-                "data_de_validade": produto[4].text,
-                "numero_de_serie": produto[5].text,
-                "instrucoes_de_armazenamento": produto[6].text},
+                produto[0].tag: produto[0].text,
+                produto[1].tag: produto[1].text,
+                produto[2].tag: produto[2].text,
+                produto[3].tag: produto[3].text,
+                produto[4].tag: produto[4].text,
+                produto[5].tag: produto[5].text,
+                produto[6].tag: produto[6].text},
                 root))
 
         # logica CSV
