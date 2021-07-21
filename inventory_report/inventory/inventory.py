@@ -1,8 +1,6 @@
 import csv
 import json
-
 from xml_to_dict import XMLtoDict
-
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 
@@ -26,8 +24,7 @@ def decode(type, data):
 
 
 class Inventory():
-    @classmethod
-    def import_data(self, csv_data, report_type):
+    def import_data(csv_data, report_type):
         type = csv_data[-3:len(csv_data)]
         data = decode(type, csv_data)
         if report_type == 'simples':
