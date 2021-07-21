@@ -1,4 +1,5 @@
-import json, pathlib, xmltodict, ast
+import json
+import pathlib, xmltodict, ast
 from csv import DictReader
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
