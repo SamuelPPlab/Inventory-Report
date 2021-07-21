@@ -2,6 +2,7 @@ from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import csv
 import json
+import xml.etree.cElementTree as ET
 
 
 class Inventory():
@@ -16,7 +17,7 @@ class Inventory():
             return result
         elif (file_type == 'xml'):
             result = cls.show_xml(cls, path, report_type)
-            return print('hj nao')
+            return result
         else:
             raise ValueError('Xablau is not iterable')
 
@@ -78,9 +79,16 @@ class Inventory():
 
     @staticmethod
     def xml_reader(path):
-        with open(path, 'r') as xmlfile:
-            data = xmlfile.read()
-        print(data)        
+        tree = ET.parse(path)
+        root = tree.getroot().findall("record")
+        lista = []
+        for tag in root:
+            dicionario = {}
+            for item in tag:
+                dicionario[item.tag] = item.text
+            lista.append(dicionario)
+        return lista
+
 
 if __name__ == '__main__':
     teste = [
