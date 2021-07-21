@@ -5,48 +5,55 @@ import csv
 import json
 
 
-class Inventory:
+def handle_csv(file_path):
     # https://stackoverflow.com/questions/21572175/convert-csv-file-to-list-of-dictionaries
     # Simon
+    with open(file_path) as cvs_file:
+        cvs_reader = csv.DictReader(cvs_file)
+        return list(cvs_reader)
+
+
+def handle_json(file_path):
+    with open(file_path) as json_file:
+        json_reader = json_file.read()
+        return json.loads(json_reader)
+
+
+def handle_xml(file_path):
+    # https://raccoon.ninja/pt/dev-pt/manipulando-xml-com-python/
+    # https://stackoverflow.com/questions/60805355/convert-xml-to-list-of-dictionaries-in-python
+    # pradeep
+    tree = ET.parse(file_path)
+    root = tree.getroot()
+    xml_result = []
+
+    for item in root.findall('./record'):
+        curr_dict = {}
+
+        for child in item:
+            curr_dict[child.tag] = child.text
+
+        xml_result.append(curr_dict)
+
+    return xml_result
+
+
+class Inventory:
     def import_data(file_path, type_report):
+        result = []
         if ".csv" in file_path:
-            with open(file_path) as cvs_file:
-                cvs_reader = csv.DictReader(cvs_file)
-                cvs_result = list(cvs_reader)
-                if type_report == 'simples':
-                    return SimpleReport.generate(cvs_result)
-                else:
-                    return CompleteReport.generate(cvs_result)
+            result = handle_csv(file_path)
 
         if ".json" in file_path:
-            with open(file_path) as json_file:
-                json_reader = json_file.read()
-                json_result = json.loads(json_reader)
-                if type_report == 'simples':
-                    return SimpleReport.generate(json_result)
-                else:
-                    return CompleteReport.generate(json_result)
+            result = handle_json(file_path)
 
-        # https://raccoon.ninja/pt/dev-pt/manipulando-xml-com-python/
-        # https://stackoverflow.com/questions/60805355/convert-xml-to-list-of-dictionaries-in-python
-        # pradeep
         if ".xml" in file_path:
-            tree = ET.parse(file_path)
-            root = tree.getroot()
-            xml_result = []
+            result = handle_xml(file_path)
 
-            for item in root.findall('./record'):
-                curr_dict = {}
-
-                for child in item:
-                    curr_dict[child.tag] = child.text
-
-                xml_result.append(curr_dict)
-
-            if type_report == 'simples':
-                return SimpleReport.generate(xml_result)
-            else:
-                return CompleteReport.generate(xml_result)
+        if type_report == 'simples':
+            return SimpleReport.generate(result)
+        else:
+            return CompleteReport.generate(result)
 
 
 cvs_path = "./inventory_report/data/inventory.csv"
