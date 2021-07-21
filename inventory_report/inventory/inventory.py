@@ -1,13 +1,12 @@
-from abc import ABC
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import csv
 
 
-class Inventory(ABC):
+class Inventory():
     @classmethod
     def import_data(cls, path, report_type):
-        dictionary = cls.csv_reader(path)        
+        dictionary = cls.csv_reader(path)
         if (report_type == 'simples'):
             result = SimpleReport.generate(dictionary)
         elif (report_type == 'completo'):
@@ -17,7 +16,7 @@ class Inventory(ABC):
     @staticmethod
     def csv_reader(path):
         with open(path, newline='') as csvfile:
-            reader = csv.DictReader(csvfile)       
+            reader = csv.DictReader(csvfile)
             lista = []
             for row in reader:
                 lista.append({
@@ -31,6 +30,7 @@ class Inventory(ABC):
                         'instrucoes_de_armazenamento'],
                 })
             return lista
+
 
 if __name__ == '__main__':
     teste = [
