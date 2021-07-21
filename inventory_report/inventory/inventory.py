@@ -24,7 +24,7 @@ def decode(type, data):
 
 
 class Inventory():
-    def import_data(self, csv_data, report_type):
+    def import_data(csv_data, report_type):
         type = csv_data[-3:len(csv_data)]
         data = decode(type, csv_data)
         if report_type == 'simples':
