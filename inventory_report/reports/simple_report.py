@@ -19,7 +19,7 @@ class SimpleReport:
         return (
             f"Data de fabricação mais antiga: {data_fab_antiga}\n"
             f"Data de validade mais próxima: {validade_proxima}\n"
-            "Empresa com maior quantidade de produtos"
+            "Empresa com maior quantidade de produtos "
             f"estocados: {maior_estoque}\n"
         )
 

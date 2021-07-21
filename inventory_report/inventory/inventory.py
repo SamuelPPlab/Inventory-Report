@@ -22,9 +22,11 @@ class Inventory:
                 header[6]: produto[6]},
                 data))
         if modo == "simples":
-            return SimpleReport.generate(lista),
+            retorno = SimpleReport.generate(lista)
+            return retorno
         if modo == "completo":
-            return CompleteReport.generate(lista),
+            retorno = CompleteReport.generate(lista)
+            return retorno
 
 
 print(Inventory.import_data("./inventory_report/data/inventory.csv", "simples"))
