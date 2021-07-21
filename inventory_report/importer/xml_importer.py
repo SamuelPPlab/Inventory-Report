@@ -28,5 +28,4 @@ class XmlImporter(Importer):
                 dicionario[item.tag] = item.text
 
             data.append(dicionario)
-
         return data
