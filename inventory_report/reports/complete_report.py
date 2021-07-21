@@ -53,4 +53,4 @@ stock = [
     },
 ]
 
-print(CompleteReport.generate(stock))
+print(CompleteReport.generatce(stock))
