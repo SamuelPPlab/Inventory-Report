@@ -1,10 +1,6 @@
 import csv
 import json
-
-from bs4 import BeautifulSoup
 from xml_to_dict import XMLtoDict
-import xml.etree.ElementTree as ET
-
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 
@@ -17,12 +13,9 @@ def decode(type, data):
             return data_csv
     elif type == 'xml':
         with open(data) as xml_file:
-            # data_xml = xml_file.read()
-            # bs_data_xml = BeautifulSoup(data_xml, "xml")
+            teste = xml_file.read()
             parser = XMLtoDict()
-            # dict_xml = ET.parse(data)
-            # root = dict_xml.getroot()
-            response = parser.value_from_nest('record', xml_file)
+            response = parser.value_from_nest('.*ecord', teste)
             return response
     else:
         with open(data) as file:
@@ -31,14 +24,9 @@ def decode(type, data):
 
 
 class Inventory():
-    @classmethod
     def import_data(self, csv_data, report_type):
         type = csv_data[-3:len(csv_data)]
         data = decode(type, csv_data)
         if report_type == 'simples':
             return SimpleReport.generate(data)
         return CompleteReport.generate(data)
-
-
-response = Inventory.import_data('inventory_report/data/inventory.xml', 'completa')
-print(response)
