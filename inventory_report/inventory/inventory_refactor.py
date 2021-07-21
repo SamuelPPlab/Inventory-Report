@@ -20,3 +20,4 @@ class InventoryRefactor(InventoryIterator):
 
     def import_data(self, path, tipo_de_relatorio):
         self.data += self.importer.import_data(path)
+        return self.data
