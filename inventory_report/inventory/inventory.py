@@ -1,9 +1,7 @@
 import csv
 import json
 
-from bs4 import BeautifulSoup
 from xml_to_dict import XMLtoDict
-import xml.etree.ElementTree as ET
 
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
