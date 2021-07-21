@@ -18,4 +18,4 @@ class XmlImporter(Importer):
                 xml_result.append(curr_dict)
 
             return xml_result
-        # raise ValueError("Arquivo inválido")
+        raise ValueError("Arquivo inválido")
