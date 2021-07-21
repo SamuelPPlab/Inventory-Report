@@ -6,18 +6,20 @@ class CompleteReport(SimpleReport):
     def __init__(self, data):
         self.data = data
 
-    def complete_generate(data):
+    def generate(data):
         list_company = []
         dict_company = {}
+        back_result = SimpleReport.generate(data)
+        response = ''
         for company in data:
             list_company.append(company["nome_da_empresa"])
         for company in list_company:
-            dict_company.setdefault(company, list_company.count(company)) 
-        return (
-            f"{SimpleReport.generate(data)} \n" +
-            "Produtos estocados por empresa: \n" +
-            f"- Forces of Nature: {dict_company['Forces of Nature']}\n" +
-            "- sanofi-aventis U.S. LLC:" +
-            f"{dict_company['sanofi-aventis U.S. LLC']}\n" +
-            f"- Newton Laboratories: {dict_company['Newton Laboratories']}\n"
+            dict_company.setdefault(company, list_company.count(company))
+        for key, value in dict_company.items():
+            response += f"- {key}: {value}\n"
+        result = (
+            f"{back_result}\n"
+            "Produtos estocados por empresa: \n"
+            f"{response}"
         )
+        return result
