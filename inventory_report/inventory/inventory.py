@@ -2,6 +2,7 @@ from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import csv
 import json
+import xmltodict
 
 
 class Inventory:
@@ -20,9 +21,13 @@ class Inventory:
         return Inventory.verify(opt, json_to_dict)
 
     def import_data(str, opt):
-        file = open(str)
-
-        if str.endswith('.csv'):
-            return Inventory.csv_convert(file, opt)
-        if str.endswith('.json'):
-            return Inventory.json_convert(file, opt)
+        with open(str) as file:
+            if str.endswith('.csv'):
+                return Inventory.csv_convert(file, opt)
+            elif str.endswith('.json'):
+                return Inventory.json_convert(file, opt)
+            elif str.endswith('.xml'):
+                xml_to_dict = xmltodict.parse(file.read())
+                converted_dict = xml_to_dict["dataset"]["record"]
+                return Inventory.verify(opt, converted_dict)
+        file.close()
