@@ -1,52 +1,47 @@
-import json
 import csv
-import xmltodict
-from inventory_report.reports import (
-    complete_report,
-    simple_report,
-)
-
-SimpleReport = simple_report.SimpleReport
-CompleteReport = complete_report.CompleteReport
+import json
+import xml.etree.ElementTree as ET
+from inventory_report.reports.simple_report import SimpleReport
+from inventory_report.reports.complete_report import CompleteReport
 
 
-class Inventory(CompleteReport):
-    def __init__(self) -> None:
-        self.sr = SimpleReport()
-        self.cr = CompleteReport()
+class Inventory:
+    @classmethod
+    def read_csv(cls, path):
+        with open(path) as file:
+            csv_file = csv.DictReader(file)
+            return list(csv_file)
 
     @classmethod
-    def import_data(cls, path: str, mode: str) -> str:
-        content = []
+    def read_json(cls, path):
+        with open(path) as file:
+            json_file = json.load(file)
+            return json_file
+
+    @classmethod
+    def read_xml(cls, path):
+        with open(path) as file:
+            inventory_list = []
+            xml_tree = ET.parse(file)
+            root = xml_tree.getroot()
+            for child in root.iter("record"):
+                item = {}
+                for record_child in child.iter("*"):
+                    if record_child.tag != "record":
+                        item[record_child.tag] = record_child.text
+                inventory_list.append(item)
+            return inventory_list
+
+    @classmethod
+    def import_data(cls, path, type):
+        if path.endswith(".csv"):
+            file_content = cls.read_csv(path)
         if path.endswith(".json"):
-            content = cls().import_json(path)
-        elif path.endswith(".csv"):
-            content = cls().import_csv(path)
-        elif path.endswith(".xml"):
-            content = cls().import_xml(path)
-
-        return cls().execute(content, mode)
-
-    def execute(self, data: list, mode: str) -> str:
-        return (
-            self.sr.generate(data)
-            if mode == "simples"
-            else self.cr.generate(data)
-        )
-
-    @staticmethod
-    def import_json(path: str) -> list:
-        with open(path, "r") as f:
-            return list(json.loads(f.read()))
-
-    @staticmethod
-    def import_csv(path: str) -> list:
-        with open(path, "r") as f:
-            return list(csv.DictReader(f))
-
-    @staticmethod
-    def import_xml(path: str) -> list:
-        with open(path, "r") as f:
-            content = f.read()
-
-        return list(xmltodict.parse(content)["dataset"]["record"])
+            file_content = cls.read_json(path)
+        if path.endswith(".xml"):
+            file_content = cls.read_xml(path)
+        if type == "simples":
+            file_content = SimpleReport.generate(file_content)
+        else:
+            file_content = CompleteReport.generate(file_content)
+        return file_content
