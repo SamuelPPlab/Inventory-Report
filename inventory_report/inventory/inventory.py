@@ -128,5 +128,5 @@ class Inventory():
 #             "numero_de_serie": "FR38 9203 3060 400T QQ8B HHS0 Q46",
 #             "instrucoes_de_armazenamento": "velit eu est congue elementum",
 #         },
-#     ] 
+#     ] a
 #     Inventory.import_data('inventory_report/data/inventory.xml', 'simples')
