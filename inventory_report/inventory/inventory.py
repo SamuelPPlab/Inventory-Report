@@ -30,4 +30,3 @@ class Inventory():
         if report_type == 'simples':
             return SimpleReport.generate(data)
         return CompleteReport.generate(data)
-    
