@@ -5,15 +5,12 @@ class CompleteReport(SimpleReport):
     @classmethod
     def generate(cls, list_dict):
         simple_report = super().generate(list_dict)
-        # print(simple_report)
 
         company_products = super()._generate_name_company(list_dict, False)
-        # print(tupla_company_products)
 
         message_products = ""
         for item in company_products:
             message_products += f"- {item}: {company_products[item]}\n"
-        # print(message_products)
 
         message = (
           f"{simple_report}\n"
@@ -63,14 +60,5 @@ if __name__ == "__main__":
             "instrucoes_de_armazenamento": "velit eu est congue elementum",
         },
     ]
-
-#     Data de fabricação mais antiga: YYYY-MM-DD
-#     Data de validade mais próxima: YYYY-MM-DD
-#     Empresa com maior quantidade de produtos estocados: NOME DA EMPRESA
-
-#     Produtos estocados por empresa:
-#     - Physicians Total Care, Inc.: QUANTIDADE
-#     - Newton Laboratories, Inc.: QUANTIDADE
-#     - Forces of Nature: QUANTIDADE
 
     print(CompleteReport.generate(LIST_EXAMPLE))

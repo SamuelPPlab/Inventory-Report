@@ -1,8 +1,6 @@
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 from inventory_report.importer.json_importer import JsonImporter
-# from inventory_report.importer.csv_importer import CsvImporter
-# from inventory_report.importer.xml_importer import XmlImporter
 
 from collections.abc import Iterable
 from inventory_report.inventory.inventory_iterator import InventoryIterator
@@ -19,11 +17,9 @@ class InventoryRefactor(Iterable):
 
         if type_report == "simples":
             report = SimpleReport.generate(list_products)
-            # print(report)
             return report
         else:
             report = CompleteReport.generate(list_products)
-            # print(report)
             return report
 
     def __iter__(self):

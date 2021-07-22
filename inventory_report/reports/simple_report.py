@@ -43,7 +43,6 @@ class SimpleReport:
             )
             return name_company_highest_qtd_products
         else:
-            # print(list_names)
             return list_names
 
     @staticmethod
@@ -63,10 +62,6 @@ class SimpleReport:
 
 if __name__ == "__main__":
 
-    # RETORNO
-    # Data de fabricação mais antiga: YYYY-MM-DD
-    # Data de validade mais próxima: YYYY-MM-DD
-    # Empresa com maior quantidade de produtos estocados: NOME DA EMPRESA
 
     LIST_EXAMPLE = [
         {

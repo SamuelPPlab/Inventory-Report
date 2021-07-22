@@ -16,7 +16,6 @@ class XmlImporter(Importer):
             }
             for child in root
         ]
-        # print("XML", list_products[0])
         return list_products
 
 
