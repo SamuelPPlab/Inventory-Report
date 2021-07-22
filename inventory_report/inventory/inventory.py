@@ -9,7 +9,6 @@ from inventory_report.reports import (
 SimpleReport = simple_report.SimpleReport
 CompleteReport = complete_report.CompleteReport
 
-
 class Inventory(CompleteReport):
     def __init__(self) -> None:
         self.sr = SimpleReport()
