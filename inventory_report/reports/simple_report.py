@@ -62,7 +62,6 @@ class SimpleReport:
 
 if __name__ == "__main__":
 
-
     LIST_EXAMPLE = [
         {
             "id": 1,
