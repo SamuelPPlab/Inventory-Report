@@ -1,37 +1,47 @@
 import csv
 import json
-from lxml import etree
+import xml.etree.ElementTree as ET
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 
 
 class Inventory:
     @classmethod
-    def import_data(cls, file_name, report_type):
-        file_extension = file_name[-4:]
-        reports_list = []
+    def read_csv(cls, path):
+        with open(path) as file:
+            csv_file = csv.DictReader(file)
+            return list(csv_file)
 
-        if (file_extension == '.csv'):
-            with open(file_name) as file:
-                content = csv.DictReader(file)
-                reports_list = list(map(lambda x: x, content))
-        elif (file_extension == '.xml'):
-            with open(file_name) as file:
-                tree = etree.parse(file)
-                root = tree.getroot()
-                for item in root:
-                    d = {}
-                    for elem in item:
-                        d[elem.tag] = elem.text
-                    reports_list.append(d)
+    @classmethod
+    def read_json(cls, path):
+        with open(path) as file:
+            json_file = json.load(file)
+            return json_file
+
+    @classmethod
+    def read_xml(cls, path):
+        with open(path) as file:
+            inventory_list = []
+            xml_tree = ET.parse(file)
+            root = xml_tree.getroot()
+            for child in root.iter("record"):
+                item = {}
+                for record_child in child.iter("*"):
+                    if record_child.tag != "record":
+                        item[record_child.tag] = record_child.text
+                inventory_list.append(item)
+            return inventory_list
+
+    @classmethod
+    def import_data(cls, path, type):
+        if path.endswith(".csv"):
+            file_content = cls.read_csv(path)
+        if path.endswith(".json"):
+            file_content = cls.read_json(path)
+        if path.endswith(".xml"):
+            file_content = cls.read_xml(path)
+        if type == "simples":
+            file_content = SimpleReport.generate(file_content)
         else:
-            with open(file_name) as file:
-                reports_list = json.load(file)
-
-        return cls.generate_report(report_type, reports_list)
-
-    def generate_report(report_type, reports_list):
-        if (report_type == 'simples'):
-            return SimpleReport.generate(reports_list)
-        else:
-            return CompleteReport.generate(reports_list)
+            file_content = CompleteReport.generate(file_content)
+        return file_content
