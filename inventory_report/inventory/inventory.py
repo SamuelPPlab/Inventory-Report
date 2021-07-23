@@ -1,9 +1,9 @@
 import csv
 import json
 import xmltodict
-
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
+
 
 class Inventory:
 
@@ -28,7 +28,7 @@ class Inventory:
         if type_of_document == "completo":
             report = CompleteReport.generate(file_in_dict)
         return report
-    
+
     def xml_report(path_document, type_of_document):
         report = ''
         file_in_dict = []
@@ -39,11 +39,11 @@ class Inventory:
             file_in_dict = [
                 {
                     item: product[item]
-                    for item in product 
+                    for item in product
                 }
                 for product in all_product
             ]
- 
+
         if type_of_document == "simples":
             report = SimpleReport.generate(file_in_dict)
         if type_of_document == "completo":
@@ -60,8 +60,3 @@ class Inventory:
         elif path_document.endswith('.xml'):
             report = Inventory.xml_report(path_document, type_of_document)
         return report
-
-if __name__ == "__main__": 
-    inventory_test = Inventory()
-    inventory_test.import_data("inventory_report/data/inventory.xml", "simples")
-        
