@@ -12,11 +12,11 @@ class Inventory:
     @classmethod
     def import_data(cls, path, report):
         ending = path[-3:]
-        if ending == 'xml':
+        if ending == '.xml':
             data = cls.import_xml(path)
-        if ending == 'son':
+        if ending == 'json':
             data = cls.import_json(path)
-        if ending == 'csv':
+        if ending == '.csv':
             data = cls.import_csv(path)
         if report == "simples":
             report = SimpleReport.generate(data)
