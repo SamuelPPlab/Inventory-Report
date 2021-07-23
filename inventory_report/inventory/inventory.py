@@ -22,13 +22,13 @@ class Inventory:
 
     def import_data(path, type):
         with open(path, "r") as file:
-            ending = path[-3:]
+            ending = path[-4:]
             result = ''
-            if ending == 'csv':
+            if ending == '.csv':
                 result = [row for row in csv.DictReader(file)]
-            if ending == 'son':
+            if ending == 'json':
                 result = json.load(file)
-            if ending == 'xml':
+            if ending == '.xml':
                 result = Inventory.import_xml(path)
             if type == "simples":
                 return SimpleReport.generate(result)
