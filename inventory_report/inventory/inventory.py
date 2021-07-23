@@ -9,7 +9,35 @@ class Inventory:
     def __init__(self, csv):
         pass
 
-    def import_xml(path):
+    @classmethod
+    def import_data(cls, path, report):
+        ending = path[-3:]
+        if ending == 'xml':
+            data = cls.import_xml(path)
+        if ending == 'son':
+            data = cls.import_json(path)
+        if ending == 'csv':
+            data = cls.import_csv(path)
+        if report == "simples":
+            report = SimpleReport.generate(data)
+        else:
+            report = CompleteReport.generate(data)
+        return report
+
+    @classmethod
+    def import_json(cls, path):
+        with open(path) as json_file:
+            file = json.load(json_file)
+            return file
+
+    @classmethod
+    def import_csv(cls, path):
+        with open(path) as csv_file:
+            file = csv.DictReader(csv_file)
+            return list(file)
+
+    @classmethod
+    def import_xml(cls, path):
         root = ET.parse(path).getroot()
         registers = root.findall("record")
         result = []
@@ -19,17 +47,3 @@ class Inventory:
                 file_dict[tag.tag] = tag.text
             result.append(file_dict)
         return result
-
-    def import_data(path, type):
-        with open(path, "r") as file:
-            ending = path[-4:]
-            result = ''
-            if ending == '.csv':
-                result = [row for row in csv.DictReader(file)]
-            if ending == 'json':
-                result = json.load(file)
-            if ending == '.xml':
-                result = Inventory.import_xml(path)
-            if type == "simples":
-                return SimpleReport.generate(result)
-            return CompleteReport.generate(result)
