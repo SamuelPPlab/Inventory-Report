@@ -55,7 +55,3 @@ class Inventory:
             return SimpleReport.generate(list_data)
         elif report == "completo":
             return CompleteReport.generate(list_data)
-
-
-# print(Inventory.import_data
-# ("inventory_report/data/inventory.xml", "simples"))
