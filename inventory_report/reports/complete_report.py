@@ -20,5 +20,4 @@ class CompleteReport(SimpleReport):
             )
 
         result_final = result + "\nProdutos estocados por empresa: \n" + r
-        print(result_final)
         return result_final
