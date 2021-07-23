@@ -12,7 +12,7 @@ class Inventory:
 
         with open(path_document) as f:
             file_in_dict = [row for row in csv.DictReader(f)]
-            print(file_in_dict)
+
         if type_of_document == "simples":
             report = SimpleReport.generate(file_in_dict)
         if type_of_document == "completo":
@@ -35,7 +35,10 @@ class Inventory:
         report = ''
         file_in_dict = []
         with open(path_document) as f:
-            file_in_dict = xmltodict.parse(f.read())
+            file_in_dict = xmltodict.parse(
+                f.read(), dict_constructor=dict
+            )['dataset']['record']
+
         if type_of_document == "simples":
             report = SimpleReport.generate(file_in_dict)
         if type_of_document == "completo":
