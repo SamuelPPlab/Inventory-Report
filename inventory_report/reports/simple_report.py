@@ -23,5 +23,5 @@ class SimpleReport:
         ]
         return f"""Data de fabricação mais antiga: {min(manufactured_list)}
 Data de validade mais próxima: {min(valid_list)}
-Empresa com maior quantidade de produtos estocados: {company_stock}
+Empresa  com maior quantidade de produtos estocados: {company_stock}
 """
