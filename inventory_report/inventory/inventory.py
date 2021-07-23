@@ -11,7 +11,7 @@ class Inventory:
 
     @classmethod
     def import_data(cls, path, report):
-        ending = path[-3:]
+        ending = path[-4:]
         if ending == '.xml':
             data = cls.import_xml(path)
         if ending == 'json':
