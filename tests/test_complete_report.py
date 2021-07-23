@@ -82,7 +82,7 @@ def test_validar_completereport_retorna_formato_correto(stock):
         "Empresa com maior quantidade de produtos "
         "estocados: sanofi-aventis U.S. LLC\n\n"
         "Produtos estocados por empresa: \n"
-        "- Forces of Nature: 1\n"
+        "- Forces of Nature: 1\n "
         "- sanofi-aventis U.S. LLC: 2\n"
         "- Newton Laboratories: 1\n"
     )
