@@ -1,6 +1,7 @@
 from datetime import datetime
 
 
+# Comentário apenas para poder dar o último commit
 class SimpleReport:
 
     def generate(list):
