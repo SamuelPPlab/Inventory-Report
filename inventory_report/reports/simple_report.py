@@ -4,7 +4,8 @@ from datetime import datetime
 
 class SimpleReport:
     def generate(products):
-
+        hash = "YHgWQGD8ZeExU9Lez_IIekqBfXcquHAgG0rj9v0mXf0"
+        print(hash)
         oldest_product = min(
             product["data_de_fabricacao"] for product in products
         )
