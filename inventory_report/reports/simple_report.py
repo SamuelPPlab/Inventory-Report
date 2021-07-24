@@ -20,21 +20,12 @@ def get_manufactory_date(list):
 
 def get_expiration_date(list):
     today = date.today()
-
-    for index, product in enumerate(list):
-        actual_date = date.fromisoformat(product["data_de_validade"])
-        if today.year < actual_date.year:
-            if index < len(list) - 2:
-                next_date = date.fromisoformat(
-                    list[index + 1]["data_de_validade"]
-                )
-                if abs(actual_date.toordinal() - today.toordinal()) < abs(
-                    next_date.toordinal() - today.toordinal()
-                ):
-                    nearest_date = actual_date
-                else:
-                    nearest_date = next_date
-    return nearest_date.isoformat()
+    dates_list = [
+        product["data_de_validade"]
+        for product in list
+        if date.fromisoformat(product["data_de_validade"]).year > today.year
+    ]
+    return min(dates_list)
 
 
 # Referência: PR Luíse Rios
