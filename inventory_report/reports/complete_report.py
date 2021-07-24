@@ -2,10 +2,10 @@ from inventory_report.reports.simple_report import SimpleReport
 from collections import Counter
 
 
-class CompleteReport(SimpleReport):      
+class CompleteReport(SimpleReport):
 
     @classmethod
-    def generate(cls, products: list) -> str:
+    def generate(cls, products):
         sp_report = SimpleReport.generate(products)
         nome_empresas = []
         companies = ""
