@@ -5,21 +5,24 @@ from inventory_report.reports.simple_report import SimpleReport
 class CompleteReport(SimpleReport):
     @classmethod
     def generate(cls, data):
-        res = super().generate(data)
+        simple_report = super().generate(data)
 
-        formato = "\n".join(
-            [
-                f"- {key}: {value}"
-                for key, value in Counter(
-                    list(map(lambda x: x["nome_da_empresa"], data))
-                ).items()
-            ]
-        )
+        count_companies_products = Counter(
+            product["nome_da_empresa"] for product in data
+        ).items()
+
+        companies_report_list = [
+            f"- {key}: {value}"
+            for key, value
+            in count_companies_products
+        ]
+
+        companies_report_string = "\n".join(companies_report_list)
 
         return (
-            f"{res}"
+            f"{simple_report}"
             "\n"
             "Produtos estocados por empresa: \n"
-            f"{formato}"
+            f"{companies_report_string}"
             "\n"
         )
