@@ -6,30 +6,23 @@ from inventory_report.reports.simple_report import SimpleReport
 
 
 class Inventory:
-    @classmethod
-    def read_csv_file(cls, csv_content: str) -> str:
-        return list(csv.DictReader(csv_content))
-
-    @classmethod
-    def read_json_file(cls, json_content: str) -> str:
-        return json.load(json_content)
-
-    @classmethod
-    def read_xml_file(cls, xml_content: str) -> str:
-        xml_content_dict = xmltodict.parse(xml_content.read())
-        return [
-            dict(product) for product in xml_content_dict["dataset"]["record"]
-        ]
+    def __init__(self, path, type):
+        self.path = path
+        self.type = type
 
     @classmethod
     def load_file(cls, path: str) -> str:
         with open(path, mode="r") as content:
             if path.endswith(".csv"):
-                return cls.read_csv_file(content)
+                return list(csv.DictReader(content))
             elif path.endswith(".json"):
-                return cls.read_json_file(content)
+                return json.load(content)
             elif path.endswith(".xml"):
-                return cls.read_xml_file(content)
+                xml_content_dict = xmltodict.parse(content.read())
+                return [
+                    dict(product)
+                    for product in xml_content_dict["dataset"]["record"]
+                ]
 
     @classmethod
     def import_data(cls, path: str, type: str) -> str:
