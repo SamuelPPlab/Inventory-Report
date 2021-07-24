@@ -1,14 +1,17 @@
-from simple_report import SimpleReport
+from inventory_report.reports.simple_report import SimpleReport
 
 
 class CompleteReport(SimpleReport):
     @classmethod
     def generate(cls, products):
-        simple_report = cls.generate(products)
-        report_tail = "Produtos estocados por empresa:\n"
+        simple_report = super().generate(products)
+        report_tail = "\nProdutos estocados por empresa: \n"
         all_companies = [product["nome_da_empresa"] for product in products]
-        companies = list(set(all_companies))
+        companies = []
+        for company in all_companies:
+            if company not in companies:
+                companies.append(company)
         for company in companies:
-            report_tail
-
-
+            report_tail += f"- {company}: {all_companies.count(company)}\n"
+        print(simple_report + report_tail)
+        return simple_report + report_tail
