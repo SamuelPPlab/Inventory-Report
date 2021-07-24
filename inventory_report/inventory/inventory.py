@@ -1,11 +1,14 @@
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
+import xmltodict
 import json
 import csv
 
 
 class Inventory:
     def import_data(path, report_type):
+        print("TESTEEEEEEE")
+        print(path)
         if path.split(".")[1] == "csv":
             with open(path, mode="r") as file:
                 file_reader = csv.DictReader(file)
@@ -18,6 +21,14 @@ class Inventory:
             with open(path, mode="r") as file:
                 list = json.load(file)
             return Generate_Report.generate(list, report_type)
+
+        if path.split(".")[1] == "xml":
+            with open(path, mode="r") as file:
+                xml_file = file.read()
+                list = json.dumps(xmltodict.parse(xml_file))
+                result = json.loads(list)  # loads @vanderson-henrique
+                final_list = result["dataset"]["record"]
+            return Generate_Report.generate(final_list, report_type)
 
 
 class Generate_Report:
