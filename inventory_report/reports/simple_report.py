@@ -2,7 +2,9 @@ from datetime import datetime
 
 
 class SimpleReport:
-    @staticmethod
+    def __init__(self, dataReport):
+        self.dataReport = dataReport
+
     def generate(dataReport: list) -> str:
         min_data_fabrication = min(
             [

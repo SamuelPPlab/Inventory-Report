@@ -3,7 +3,9 @@ from collections import OrderedDict
 
 
 class CompleteReport(SimpleReport):
-    @staticmethod
+    def __init__(self, dataReport):
+        self.dataReport = dataReport
+
     def generate(dataReport: list) -> str:
         new_data = list(
             OrderedDict.fromkeys(

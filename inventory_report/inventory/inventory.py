@@ -1,0 +1,40 @@
+import csv
+import json
+import xmltodict
+from inventory_report.reports.complete_report import CompleteReport
+from inventory_report.reports.simple_report import SimpleReport
+
+
+class Inventory:
+    @classmethod
+    def read_csv_file(cls, csv_content: str) -> str:
+        return list(csv.DictReader(csv_content))
+
+    @classmethod
+    def read_json_file(cls, json_content: str) -> str:
+        return json.load(json_content)
+
+    @classmethod
+    def read_xml_file(cls, xml_content: str) -> str:
+        xml_content_dict = xmltodict.parse(xml_content.read())
+        return [
+            dict(product) for product in xml_content_dict["dataset"]["record"]
+        ]
+
+    @classmethod
+    def load_file(cls, path: str) -> str:
+        with open(path, mode="r") as content:
+            if path.endswith(".csv"):
+                return cls.read_csv_file(content)
+            elif path.endswith(".json"):
+                return cls.read_json_file(content)
+            elif path.endswith(".xml"):
+                return cls.read_xml_file(content)
+
+    @classmethod
+    def import_data(cls, path: str, type: str) -> str:
+        product_list = cls.load_file(path)
+        if type == "simples":
+            return SimpleReport.generate(product_list)
+        elif type == "completo":
+            return CompleteReport.generate(product_list)
