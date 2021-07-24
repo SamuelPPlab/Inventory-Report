@@ -10,7 +10,6 @@ class SimpleReport:
             return False
         return True
 
-    @classmethod
     def generate(data):
         data_fabricacao_mais_antiga = min(
             map(lambda x: x["data_de_fabricacao"], data)
