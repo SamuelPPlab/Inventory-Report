@@ -1,36 +1,25 @@
-from statistics import mode
 from datetime import datetime
+from collections import Counter
 
 
 class SimpleReport:
-    def menor_data(string_date):
-        data = datetime.strptime(string_date, "%Y-%m-%d")
-        atual = datetime.now()
-        if data < atual:
-            return False
-        return True
+    @staticmethod
+    def company_counter(self, prodList):
+        companies = [elem["nome_da_empresa"] for elem in prodList]
+        companies_counter = Counter(companies)
+        return companies_counter
 
     @classmethod
-    def generate(data):
-        data_fabricacao_mais_antiga = min(
-            map(lambda x: x["data_de_fabricacao"], data)
-        )
-
-        validade_mais_proxima = min(
-            item["data_de_validade"]
-            for item in data
-            if SimpleReport.menor_data(item["data_de_validade"])
-        )
-
-        empresa_com_maior_estoque = mode(
-            list(map(lambda x: x["nome_da_empresa"], data))
-        )
-
-        dados_formatados = (
-            f"Data de fabricação mais antiga: {data_fabricacao_mais_antiga}\n"
-            f"Data de validade mais próxima: {validade_mais_proxima}\n"
-            "Empresa com maior quantidade de produtos estocados: "
-            f"{empresa_com_maior_estoque}"
-            "\n"
-        )
-        return dados_formatados
+    def generate(cls, products):
+        today = datetime.today()
+        manufactured_list = [elem["data_de_fabricacao"] for elem in products]
+        valid_list = [
+            elem["data_de_validade"]
+            for elem in products
+            if today < datetime.strptime(elem["data_de_validade"], "%Y-%m-%d")
+        ]
+        company_stock = cls.company_counter(cls, products).most_common(1)[0][0]
+        return f"""Data de fabricação mais antiga: {min(manufactured_list)}
+Data de validade mais próxima: {min(valid_list)}
+Empresa com maior quantidade de produtos estocados: {company_stock}
+"""
