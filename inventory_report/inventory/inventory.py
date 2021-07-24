@@ -5,6 +5,7 @@ import csv
 import xmldict
 import xml.etree.ElementTree as ET
 
+
 class Inventory:
     def import_data(path, type):
         products = []
