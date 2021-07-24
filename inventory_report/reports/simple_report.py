@@ -24,6 +24,6 @@ class SimpleReport:
             f"Data de fabricação mais antiga: {oldest_product}\n"
             f"Data de validade mais próxima: {next_to_expire}\n"
             "Empresa com maior quantidade de "
-            f"produtos estocados: {common_company}"
+            f"produtos estocados: {common_company}\n"
         )
         return report
