@@ -11,7 +11,7 @@ class XmlImporter(Importer):
             doc = xmltodict.parse(f.read())
             all_product = doc["dataset"]["record"]
             file_in_dict = [
-                { item: product[item] for item in product }
+                {item: product[item] for item in product}
                 for product in all_product
             ]
 
