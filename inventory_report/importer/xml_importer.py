@@ -3,13 +3,13 @@ from inventory_report.importer.importer import Importer
 
 
 class XmlImporter(Importer):
-    def import_data(file):
-        if file.endswith(".xml"):
-            with open(file, mode="r") as xml_content:
-                xml_content_dict = xmltodict.parse(xml_content.read())
+    def import_data(file_path):
+        if file_path.endswith(".xml"):
+            with open(file_path, mode="r") as file:
+                content = xmltodict.parse(file.read())
                 return [
                     dict(product)
-                    for product in xml_content_dict["dataset"]["record"]
+                    for product in content["dataset"]["record"]
                 ]
 
         raise ValueError("Arquivo inválido")
