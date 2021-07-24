@@ -15,5 +15,5 @@ class Inventory:
     @classmethod
     def import_data(self, path, type):
         if path.endswith('.csv'):
-            data = CsvImporter.import_data(path)
-            return self.reports(data, type)
+            data_report = CsvImporter.import_data(path)
+            return self.reports(data_report, type)
