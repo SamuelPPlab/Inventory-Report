@@ -13,5 +13,4 @@ class CompleteReport(SimpleReport):
                 companies.append(company)
         for company in companies:
             report_tail += f"- {company}: {all_companies.count(company)}\n"
-        print(simple_report + report_tail)
         return simple_report + report_tail
