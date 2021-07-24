@@ -1,17 +1,19 @@
 from statistics import mode
-from datetime import date
+from datetime import datetime
 
 
 class SimpleReport:
-
     def generate(products):
 
         oldest_product = min(
             product["data_de_fabricacao"] for product in products
         )
 
-        next_to_expire = max(
-            product["data_de_validade"] for product in products
+        next_to_expire = min(
+            product["data_de_validade"]
+            for product in products
+            if product["data_de_validade"]
+            > datetime.today().strftime("%Y-%m-%d")
         )
 
         common_company = mode(
