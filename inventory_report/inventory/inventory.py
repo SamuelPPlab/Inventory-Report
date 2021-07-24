@@ -1,3 +1,4 @@
+from inventory_report.importer.json_importer import JsonImporter
 from inventory_report.importer.csv_importer import CsvImporter
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
@@ -15,5 +16,6 @@ class Inventory:
     @classmethod
     def import_data(self, path, type):
         if path.endswith('.csv'):
-            data_report = CsvImporter.import_data(path)
-            return self.reports(data_report, type)
+            return self.reports(CsvImporter.import_data(path), type)
+        if path.endswith('.json'):
+            return self.reports(JsonImporter.import_data(path), type)
