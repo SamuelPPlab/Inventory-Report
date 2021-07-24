@@ -7,8 +7,6 @@ import csv
 
 class Inventory:
     def import_data(path, report_type):
-        print("TESTEEEEEEE")
-        print(path)
         if path.split(".")[1] == "csv":
             with open(path, mode="r") as file:
                 file_reader = csv.DictReader(file)
