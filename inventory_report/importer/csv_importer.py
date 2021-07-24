@@ -1,12 +1,11 @@
-import os
-from .importer import Importer
+from inventory_report.importer.importer import Importer
+from inventory_report.inventory.inventory import Inventory
 
 
 class CsvImporter(Importer):
-    @classmethod
-    def import_data(cls, path):
-        _, file_extension = os.path.splitext(path)
-        if file_extension == ".csv":
-            return cls.open_file(path, file_extension)
-        else:
-            raise ValueError("Arquivo inválido")
+    def import_data(file):
+        if file.endswith(".csv"):
+            with open(file, mode="r") as content:
+                return Inventory.load_by_extension(file, content)
+
+        raise ValueError("Arquivo inválido")

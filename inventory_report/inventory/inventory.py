@@ -1,28 +1,29 @@
-from inventory_report.reports.simple_report import SimpleReport
+from csv import DictReader
 from inventory_report.reports.complete_report import CompleteReport
-from inventory_report.importer.csv_importer import CsvImporter
-from inventory_report.importer.json_importer import JsonImporter
-from inventory_report.importer.xml_importer import XmlImporter
+from inventory_report.reports.simple_report import SimpleReport
+import xmltodict
+from json import load
 
 
 class Inventory:
-    @classmethod
-    def import_data(cls, filepath, report_type):
-        products = cls.import_products(filepath)
-        return cls.generate_report(products, report_type)
-
-    @classmethod
-    def import_products(cls, filepath):
-        if filepath.endswith(".csv"):
-            return CsvImporter.import_data(filepath)
-        elif filepath.endswith(".json"):
-            return JsonImporter.import_data(filepath)
-        elif filepath.endswith(".xml"):
-            return XmlImporter.import_data(filepath)
-
-    @classmethod
-    def generate_report(cls, products_list, report_type):
-        if report_type == "simples":
-            return SimpleReport.generate(products_list)
+    def load_by_extension(path, content):
+        if path.endswith('.csv'):
+            return list(DictReader(content))
+        elif path.endswith('.json'):
+            return load(content)
         else:
-            return CompleteReport.generate(products_list)
+            path.endswith(".xml")
+            return list(
+                map(
+                    lambda x: dict(x),
+                    xmltodict.parse(content.read())["dataset"]["record"],
+                )
+            )
+
+    def import_data(path, report_type):
+        with open(path, mode='r') as content:
+            content_dict = Inventory.load_by_extension(path, content)
+            if report_type == 'simples':
+                return SimpleReport.generate(content_dict)
+            else:
+                return CompleteReport.generate(content_dict)

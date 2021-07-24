@@ -1,24 +1,23 @@
-from collections.abc import Iterable
 from inventory_report.inventory.inventory_iterator import InventoryIterator
-from inventory_report.reports.simple_report import SimpleReport
-from inventory_report.reports.complete_report import CompleteReport
 
 
-class InventoryRefactor(Iterable):
-    def __init__(self, importer):
+class InventoryRefactor(InventoryIterator):
+    def __init__(self, importer_class):
+        self.importer = importer_class
         self.data = []
-        self.importer = importer
+        self.row = 0
 
     def __iter__(self):
-        return InventoryIterator(self.data)
+        self.row = 0
+        return self
 
-    def import_data(self, filepath, reporter_type):
-        self.data = [*self.data, *self.importer.import_data(filepath)]
-        return self.generate_report(self.data, reporter_type)
+    def __next__(self):
+        try:
+            row = self.data[self.row]
+        except IndexError:
+            raise StopIteration
+        self.row += 1
+        return row
 
-    @classmethod
-    def generate_report(cls, products_list, reporter_type):
-        if reporter_type == "simples":
-            return SimpleReport.generate(products_list)
-        else:
-            return CompleteReport.generate(products_list)
+    def import_data(self, path, report_type):
+        self.data += self.importer.import_data(path)
