@@ -23,9 +23,8 @@ class SimpleReport:
         for comp in report:
             company.append(comp["nome_da_empresa"])
 
-        company_count = Counter(company)
-        max_show_company = list(company_count.keys())[1]
-
+        company_count = Counter(company)                
+        max_show_company = max(company_count)
         result1 = "Data de fabricação mais antiga: {oldest_data}\n".format(
             oldest_data=oldest_data
         )
