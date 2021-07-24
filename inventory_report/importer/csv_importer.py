@@ -7,7 +7,7 @@ class CsvImporter(Importer):
     @classmethod
     def import_data(self, path):
         if (path.endswith('.csv')):
-            self.data = []
+            data = []
             with open(path) as file:
                 inventory_csv = csv.reader(file, delimiter=",", quotechar='"')
                 header, *data = inventory_csv
@@ -22,4 +22,4 @@ class CsvImporter(Importer):
                     data))
             return lista
         else:
-            raise Exception('Arquivo incorreto')
+            raise ValueError("Arquivo inválido")
