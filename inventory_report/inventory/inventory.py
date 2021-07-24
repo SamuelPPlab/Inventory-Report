@@ -1,6 +1,7 @@
 import csv
 import json
-# Referência: https://python-guide-pt-br.readthedocs.io/pt_BR/latest/scenarios/xml.html
+# Referência:
+# https://python-guide-pt-br.readthedocs.io/pt_BR/latest/scenarios/xml.html
 import xmltodict
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
