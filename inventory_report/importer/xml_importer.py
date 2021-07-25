@@ -7,6 +7,7 @@ class XmlImporter(Importer):
         with open(file_name, 'r') as content_file:
             if file_name.endswith(".xml"):
                 xml2dict = xmltodict.parse(content_file.read())
-                return xml2dict["dataset"]["record"]
+                result_format = xml2dict["dataset"]["record"]
+                return result_format
             else:
                 raise ValueError("Arquivo inválido")
