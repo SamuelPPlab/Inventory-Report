@@ -19,14 +19,14 @@ class SimpleReport:
             if product["data_de_validade"] > today
         )
 
-        name = Counter(
+        c_name = Counter(
             company["nome_da_empresa"] for company in list
         ).most_common()[0][0]
 
         return (
             f"Data de fabricação mais antiga: {oldest_fabrication_date}\n"
             f"Data de validade mais próxima: {closest_expiration_date}\n"
-            f"Empresa com maior quantidade de produtos estocados: {name}\n"
+            f"Empresa com maior quantidade de produtos estocados: {c_name}\n"
         )
 
 
