@@ -1,11 +1,13 @@
 from inventory_report.importer.importer import Importer
-import xml.etree.ElementTree as ET
-
+import xml_to_dict
 
 
 class XmlImporter(Importer):
     def import_data(arq):
+        Importer.validate_extension(arq, "xml")
         with open(arq, "r") as content:
-            result = xmltodict.parse(content.read())
-            result_final = [dict(linha) for linha in result["dataset"]["record"]]
+            parser = xml_to_dict.XMLtoDict()
+            file = content.read()
+            result = parser.parse(file)
+            result_final = [dict(line) for line in result["dataset"]["record"]]
             return result_final
