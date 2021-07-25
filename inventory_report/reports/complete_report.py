@@ -20,5 +20,6 @@ class CompleteReport(SimpleReport):
             products_size = list(
               filter(lambda x: x["nome_da_empresa"] == enterprise,
                      object_to_report))
-            enterprise_products.append(f"- {enterprise}: {len(products_size)}\n")
+            enterprise_products.append(
+              f"- {enterprise}: {len(products_size)}\n")
         return enterprise_products
