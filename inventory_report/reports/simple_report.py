@@ -26,15 +26,22 @@ class SimpleReport:
         return name_company
 
     def get_new_date(products):
-        date_new = products[0]["data_de_validade"]
-        date_new = SimpleReport.transform_date_format(date_new)
+        date_actual = datetime.today().date()
+
+        count_diff_date = 1000
+        date_validate = ""
+
         for product in products:
-            date_now = SimpleReport.transform_date_format(
+            date_currence = SimpleReport.transform_date_format(
                 product["data_de_validade"]
             )
-            if date_new < date_now:
-                date_new = date_now
-        return date_new.strftime("%Y-%m-%d")
+            if date_currence > date_actual:
+                diff_dates = (date_currence - date_actual).days
+                if (diff_dates) < count_diff_date:
+                    date_validate = date_currence
+                    count_diff_date = diff_dates
+
+        return date_validate.strftime("%Y-%m-%d")
 
     def mount_list_anythink(dict, key):
         list = []
@@ -58,47 +65,3 @@ class SimpleReport:
             f"estocados: {company_name}\n"
         )
         return report
-'''
-stock = [
-        {
-            "id": 1,
-            "nome_do_produto": "CALENDULA OFFICINALIS FLOWERING TOP",
-            "nome_da_empresa": "Forces of Nature",
-            "data_de_fabricacao": "2020-07-04",
-            "data_de_validade": "2023-02-09",
-            "numero_de_serie": "FR48 2002 7680 97V4 W6FO LEBT 081",
-            "instrucoes_de_armazenamento": "in blandit ultrices enim",
-        },
-        {
-            "id": 2,
-            "nome_do_produto": "sodium ferric gluconate complex",
-            "nome_da_empresa": "sanofi-aventis U.S. LLC",
-            "data_de_fabricacao": "2020-05-31",
-            "data_de_validade": "2023-01-17",
-            "numero_de_serie": "SE95 2662 8860 5529 8299 2861",
-            "instrucoes_de_armazenamento": "duis bibendum morbi",
-        },
-        {
-            "id": 3,
-            "nome_do_produto": "Dexamethasone Sodium Phosphate",
-            "nome_da_empresa": "sanofi-aventis U.S. LLC",
-            "data_de_fabricacao": "2019-09-13",
-            "data_de_validade": "2023-02-13",
-            "numero_de_serie": "BA52 2034 8595 7904 7131",
-            "instrucoes_de_armazenamento": "morbi quis tortor id",
-        },
-        {
-            "id": 4,
-            "nome_do_produto": "Uricum acidum, Benzoicum acidum",
-            "nome_da_empresa": "Newton Laboratories, Inc.",
-            "data_de_fabricacao": "2019-11-08",
-            "data_de_validade": "2019-11-25",
-            "numero_de_serie": "FR38 9203 3060 400T QQ8B HHS0 Q46",
-            "instrucoes_de_armazenamento": "velit eu est congue elementum",
-        },
-    ]
-
-
-report = SimpleReport.generate(stock)
-print(report)
-print("Data de fabricação mais antiga: 2019-09-13" in report)'''
