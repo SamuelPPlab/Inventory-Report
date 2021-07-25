@@ -5,15 +5,18 @@ import csv
 
 
 class Inventory:
-    def generate_report_CSV(file_path, report_type):
+    def generate_report(content, report_type):
+        if report_type == 'simples':
+            return SimpleReport.generate(content)
+        else:
+            return CompleteReport.generate(content)
+
+    def read_CSV_file(file_path, report_type):
         with open(file_path, 'r') as csv_file:
             content = csv.DictReader(csv_file)
             converted_content = list(content)
-            if report_type == 'simples':
-                return SimpleReport.generate(converted_content)
-            elif report_type == 'completo':
-                return CompleteReport.generate(converted_content)
+            return Inventory.generate_report(converted_content, report_type)
 
     def import_data(file_path, report_type):
         if file_path.endswith('csv'):
-            return Inventory.generate_report_CSV(file_path, report_type)
+            return Inventory.read_CSV_file(file_path, report_type)
