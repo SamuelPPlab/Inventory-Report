@@ -13,6 +13,8 @@ class Inventory:
     @classmethod
     def load_file(cls, path: str) -> str:
         with open(path, mode="r") as content:
+            print("asfljkhhgasdflkjhasdflkjhasdflkjbh")
+            print(content)
             if path.endswith(".csv"):
                 return list(csv.DictReader(content))
             elif path.endswith(".json"):
