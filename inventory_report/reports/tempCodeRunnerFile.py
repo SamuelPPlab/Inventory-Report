@@ -8,7 +8,7 @@ class CompleteReport(SimpleReport):
     this_template = Template("\nProdutos estocados por empresa: \n$result\n")
     a = Counter(item["nome_da_empresa"] for item in list).items()
     print(a)
-    
+
     @classmethod
     def generate(cls, list):
         result = "\n".join(
