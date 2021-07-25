@@ -19,9 +19,9 @@ class Inventory:
             elif file_path.endswith(".json"):
                 return json.load(content_file)
             elif file_path.endswith(".xml"):
-                parsing = xmltodict.parse(content_file.read())
-                return parsing["dataset"]["record"]
-            # Ref. working with xml: encurtador.com.br/deqFZ
+                xml2dict = xmltodict.parse(content_file.read())
+                return xml2dict["dataset"]["record"]
+            # Ref. working with xml: https://bit.ly/2Vc7fuS
             else:
                 return None
 
