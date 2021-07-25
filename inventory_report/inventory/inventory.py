@@ -26,7 +26,7 @@ class Inventory:
     @classmethod
     def import_data(cls, path, type):
         list = cls.load(path)
-        if type == "completo":
+        if type == 'completo':
             return CompleteReport.generate(list)
         elif type == "simples":
             return SimpleReport.generate(list)
