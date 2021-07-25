@@ -1,7 +1,37 @@
 from inventory_report.reports.simple_report import SimpleReport
-from typing import Counter
 
-reports_list = [
+
+class CompleteReport(SimpleReport):
+    @classmethod
+    def generate(cls, report_list):
+        oldest_manufacturing_date = cls.getOldestManufacturingDate(
+            report_list
+        )
+        closest_valid_date = cls.getClosestValidDate(report_list)
+        company_with_more_products = cls.getCompanyWithMoreProducts(
+            cls,
+            report_list
+        )['name']
+        most_commom_companies = cls.productsByCompany(
+            cls,
+            report_list
+        )
+
+        company_list = ''
+        for company in most_commom_companies:
+            company_list += f'- {company["name"]}: {company["quantity"]}\n'
+
+        return (
+            f'Data de fabricação mais antiga: {oldest_manufacturing_date}\n'
+            + f'Data de validade mais próxima: {closest_valid_date}\n'
+            + 'Empresa com maior quantidade de produtos estocados: '
+            + f'{company_with_more_products}\n\n'
+            + 'Produtos estocados por empresa: \n'
+            + company_list
+        )
+
+
+print(CompleteReport.generate([
         {
             "id": 1,
             "nome_do_produto": "CALENDULA OFFICINALIS FLOWERING TOP",
@@ -32,37 +62,10 @@ reports_list = [
         {
             "id": 4,
             "nome_do_produto": "Uricum acidum, Benzoicum acidum",
-            "nome_da_empresa": "Newton Laboratories, Inc.",
+            "nome_da_empresa": "Newton Laboratories",
             "data_de_fabricacao": "2019-11-08",
             "data_de_validade": "2019-11-25",
             "numero_de_serie": "FR38 9203 3060 400T QQ8B HHS0 Q46",
             "instrucoes_de_armazenamento": "velit eu est congue elementum",
         },
-    ]
-
-
-class CompleteReport(SimpleReport):
-    @classmethod
-    def generate(cls, report_list):
-        oldest_manufacturing_date = cls.getOldestManufacturingDate(
-            report_list
-        )
-        closest_valid_date = cls.getClosestValidDate(report_list)
-        company_with_more_products = cls.getCompanyWithMoreProducts(
-            report_list
-        )
-        most_commom_companies = cls.getCompanyWithMoreProducts(report_list)
-
-        return (
-            f'Data de fabricação mais antiga: {oldest_manufacturing_date}\n'
-            + f'Data de validade mais próxima: {closest_valid_date}\n'
-            + 'Empresa com maior quantidade de produtos estocados: '
-            + f'{company_with_more_products[0][0]}\n\n'
-            + 'Produtos estocados por empresa: \n'
-            + f'- Forces of Nature: {most_commom_companies[1][1]}\n'
-            + f'- sanofi-aventis U.S. LLC: {most_commom_companies[0][1]}\n'
-            + f'- Newton Laboratories: {most_commom_companies[2][1]}\n'
-        )
-
-
-print(CompleteReport.generate(reports_list))
+    ]))
