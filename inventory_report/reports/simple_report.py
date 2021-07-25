@@ -3,6 +3,7 @@ import datetime as datetime
 
 class SimpleReport:
 
+    @staticmethod
     def generate(object_to_report):
         data_fabricacao = SimpleReport.generate_oldest_manufacturing_date(
           object_to_report)
@@ -36,7 +37,8 @@ class SimpleReport:
         return filter(lambda x: x > datetime.datetime.now(), list)
 
     def return_all_enterprises_names(object_to_report):
-        return set([i["nome_da_empresa"] for i in object_to_report])
+        return list(dict.fromkeys(
+          [i["nome_da_empresa"] for i in object_to_report]))
 
     def return_the_most_frequent_enterprise(object_to_report):
         enterprise_list = [i["nome_da_empresa"] for i in object_to_report]
