@@ -4,7 +4,7 @@ import xml.etree.cElementTree as ET
 
 class XmlImporter(Importer):
     @staticmethod
-    def import_data(path):
+    def import_data(path, type_report):
         if path.endswith(".xml"):
             xml = ET.parse(path)
             xml_root = xml.getroot()

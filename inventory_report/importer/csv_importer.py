@@ -4,7 +4,7 @@ import csv
 
 class CsvImporter(Importer):
     @staticmethod
-    def import_data(path):
+    def import_data(path, type_report):
         if path.endswith(".csv"):
             with open(path, mode="r") as file:
                 reader_file = csv.DictReader(
