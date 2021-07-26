@@ -40,9 +40,6 @@ class Inventory:
             return CompleteReport.generate(formated_list)
 
 
-inventory = Inventory()
-inventory.import_data("/home/jessica/rep_trybe/trybe_projects/cc/sd-07-inventory-report/inventory_report/data/inventory.json", "completo")
-
 # Andre Horman e Lucca Focosi - Carol Andrade e Strongreen
 # https://stackoverflow.com/questions/4613000/difference-between-cls-and-self-in-python-classes
 # https://www.programmersought.com/article/99101354414/
