@@ -16,7 +16,6 @@ class Inventory():
     def cvsToJson(file_path):
         report_list = []
         with open(file_path) as file:
-            print('aqui!!')
             data = csv.DictReader(file)
             for rows in data:
                 report_list.append(rows)
@@ -47,6 +46,3 @@ class Inventory():
             return CompleteReport.generate(report_list)
         else:
             return None
-
-
-# print(Inventory.import_data('inventory_report/data/inventory.xml', 'completo'))
