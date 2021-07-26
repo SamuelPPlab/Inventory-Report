@@ -3,6 +3,7 @@ from inventory_report.inventory.inventory_iterator import InventoryIterator
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 
+
 class InventoryRefactor(Iterable):
     def __init__(self, importer=None):
         self.importer = importer

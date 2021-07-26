@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 from inventory_report.importer.importer import Importer
 
+
 class XmlImporter(Importer):
     @staticmethod
     def read_xml(path):
