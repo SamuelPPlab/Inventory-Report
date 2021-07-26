@@ -3,10 +3,6 @@ from collections import Counter
 
 
 class SimpleReport:
-    """     @classmethod
-    def __init__(self, list):
-        self.list = list """
-
     def generate(list):
         today = datetime.today().strftime("%Y-%m-%d")
 
