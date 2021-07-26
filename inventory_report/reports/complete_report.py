@@ -2,6 +2,7 @@ from collections import Counter
 from inventory_report.reports.simple_report import SimpleReport
 
 # complete_report
+# Complete_report
 
 
 class CompleteReport(SimpleReport):
