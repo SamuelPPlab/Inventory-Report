@@ -43,6 +43,7 @@ class SimpleReport:
 
         return date_validate.strftime("%Y-%m-%d")
 
+    @staticmethod
     def mount_list_anythink(dict, key):
         list = []
         for item in dict:
