@@ -68,7 +68,7 @@ class SimpleReport():
         bigger_quantity = 0
         products_by_company = self.productsByCompany(self, report_list)
         bigger_quantity_company = {}
- 
+
         for company in products_by_company:
             if (company['quantity'] > bigger_quantity):
                 bigger_quantity = company['quantity']
