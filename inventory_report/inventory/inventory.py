@@ -20,7 +20,6 @@ class Inventory:
         with open(path, 'r') as xml_file:
             parser = XMLtoDict()
             xml_list = xml_file.read()
-            print(parser.value_from_nest("record", xml_list))
             return parser.value_from_nest("record", xml_list)
 
     def verify_file_format(cls, path):
