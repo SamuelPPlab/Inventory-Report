@@ -11,13 +11,6 @@ class SimpleReport:
 
         date_now = datetime.now()
 
-        # list_validity = [
-        #     value["data_de_validade"]
-        #     for value in dictionary
-        #     if datetime.strptime(value["data_de_validade"], "%Y-%m-%d")
-        #     > date_now
-        # ]
-
         list_validity = []
         for item in dictionary:
             date_validity = item["data_de_validade"]
