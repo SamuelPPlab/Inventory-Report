@@ -20,6 +20,12 @@ class CompleteReport(SimpleReport):
             )
         return dic_companies
 
+    def amount_phase(dic_companies):
+        phase = "Produtos estocados por empresa: \n"
+        for key, value in dic_companies.items():
+            phase += f"- {key}: {value}\n"
+        return phase
+
     @classmethod
     def generate(self, products):
         report = super().generate(products)
@@ -34,15 +40,4 @@ class CompleteReport(SimpleReport):
             companies_not_repeat, companies
         )
 
-        quant_nature = dic_companies['Forces of Nature']
-        quant_sanofi = dic_companies['sanofi-aventis U.S. LLC']
-        quant_newton = dic_companies['Newton Laboratories']
-
-        company_report = (
-            f"Produtos estocados por empresa: \n"
-            f"- Forces of Nature: {quant_nature}\n"
-            f"- sanofi-aventis U.S. LLC: {quant_sanofi}\n"
-            f"- Newton Laboratories: {quant_newton}\n"
-        )
-
-        return report + "\n" + company_report
+        return report + "\n" + CompleteReport.amount_phase(dic_companies)
