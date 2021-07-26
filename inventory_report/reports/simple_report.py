@@ -1,5 +1,6 @@
 from statistics import mode
 from datetime import date
+# só para comitar
 
 
 class SimpleReport:
