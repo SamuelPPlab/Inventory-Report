@@ -7,4 +7,4 @@ class JsonImporter(Importer):
     def import_data(cls, data):
         if not data.endswith(".json"):
             raise ValueError("Arquivo inválido")
-        return Inventory.json_open(data)
+        return Inventory.open_json_archive(data)

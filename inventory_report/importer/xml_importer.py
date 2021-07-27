@@ -7,4 +7,4 @@ class XmlImporter(Importer):
     def import_data(cls, xml_data):
         if not xml_data.endswith(".xml"):
             raise ValueError("Arquivo inválido")
-        return Inventory.xml_open(xml_data)
+        return Inventory.open_xml_archive(xml_data)
