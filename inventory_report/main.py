@@ -28,5 +28,10 @@ def main():
 if __name__ == "__main__":
     sys.exit(main())
 
-# ('Data de fabricação mais antiga: 2019-09-06\n'\n 'Data de validade mais próxima: 2022-09-17\n'\n 'Empresa com maior quantidade de produtos estocados: Target Corporation\n')
-# ('Data de fabricação mais antiga: 2019-09-06\n'\n 'Data de validade mais próxima: 2022-09-17\n'\n 'Empresa com maior quantidade de produtos estocados: Target Corporation\n'\n '\n')
+# ('Data de fabricação mais antiga: 2019-09-06\n'\n
+# 'Data de validade mais próxima: 2022-09-17\n'\n
+# 'Empresa com maior quantidade de produtos estocados: Target Corporation\n')
+# ('Data de fabricação mais antiga: 2019-09-06\n'\n
+# 'Data de validade mais próxima: 2022-09-17\n'\n
+# 'Empresa com maior quantidade de produtos estocados:
+#  Target Corporation\n'\n '\n')

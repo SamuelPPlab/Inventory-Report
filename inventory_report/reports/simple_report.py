@@ -28,8 +28,8 @@ class SimpleReport:
 
         result = (
             f"Data de fabricação mais antiga: {last_date}\n"
-            + f"Data de validade mais próxima: {date_validity}\n"
-            + f"Empresa com maior quantidade de produtos estocados: {name}\n"
+            f"Data de validade mais próxima: {date_validity}\n"
+            f"Empresa com maior quantidade de produtos estocados: {name}\n"
         )
 
         return result
