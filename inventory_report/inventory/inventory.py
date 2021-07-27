@@ -35,7 +35,6 @@ class Inventory:
         else:
             return CompleteReport.generate(dict_products)
 
-    @classmethod
     def import_data(file_path, type_report):
         dict_products = {}
 
