@@ -19,4 +19,4 @@ class CompleteReport(SimpleReport):
           f"{simpleReport}\n"
           + "Produtos estocados por empresa: \n"
           + f"{companiesProductsReport}"
-        )
+        ) 
