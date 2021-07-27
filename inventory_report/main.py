@@ -3,8 +3,6 @@ from inventory_report.importer.csv_importer import CsvImporter
 from inventory_report.importer.json_importer import JsonImporter
 from inventory_report.importer.xml_importer import XmlImporter
 from inventory_report.inventory.inventory_refactor import InventoryRefactor
-from inventory_report.reports.simple_report import SimpleReport
-from inventory_report.reports.complete_report import CompleteReport
 
 
 def import_instance(file):
@@ -17,19 +15,18 @@ def import_instance(file):
 
 
 def main():
-    _, export_file, type_report = sys.argv
-
     if len(sys.argv) < 3:
-        raise ValueError("Verifique os argumentos")
-
-    instance = import_instance(export_file)
-    instance.import_data(export_file, type_report)
-    dictionary = instance.data
-
-    if type_report == "completo":
-        return CompleteReport.generate(dictionary)
-    return SimpleReport.generate(dictionary)
+        sys.stderr.write("Verifique os argumentos\n")
+        # print("Verifique os argumentos", file=sys.stderr)
+    else:
+        _, export_file, type_report = sys.argv
+        instance = import_instance(export_file)
+        result = instance.import_data(export_file, type_report)
+        print(result, end="")
 
 
 if __name__ == "__main__":
     sys.exit(main())
+
+# ('Data de fabricação mais antiga: 2019-09-06\n'\n 'Data de validade mais próxima: 2022-09-17\n'\n 'Empresa com maior quantidade de produtos estocados: Target Corporation\n')
+# ('Data de fabricação mais antiga: 2019-09-06\n'\n 'Data de validade mais próxima: 2022-09-17\n'\n 'Empresa com maior quantidade de produtos estocados: Target Corporation\n'\n '\n')

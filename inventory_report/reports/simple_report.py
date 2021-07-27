@@ -26,10 +26,10 @@ class SimpleReport:
         list_name = [value["nome_da_empresa"] for value in dictionary]
         name, _ = Counter(list_name).most_common()[0]
 
-        result = f"Data de fabricação mais antiga: {last_date}\n"
-        result += f"Data de validade mais próxima: {date_validity}\n"
-        result += (
-            f"Empresa com maior quantidade de produtos estocados: {name}\n"
+        result = (
+            f"Data de fabricação mais antiga: {last_date}\n"
+            + f"Data de validade mais próxima: {date_validity}\n"
+            + f"Empresa com maior quantidade de produtos estocados: {name}\n"
         )
 
         return result
