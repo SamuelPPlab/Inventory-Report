@@ -10,12 +10,12 @@ def main():
         return sys.stderr.write("Verifique os argumentos\n")
     else:
         if (sys.argv[1].endswith('.xml')):
-            instance = InventoryRefactor(XmlImporter)
+            inventoryInstance = InventoryRefactor(XmlImporter)
         elif (sys.argv[1].endswith('.json')):
-            instance = InventoryRefactor(JsonImporter)
+            inventoryInstance = InventoryRefactor(JsonImporter)
         elif (sys.argv[1].endswith('.csv')):
-            instance = InventoryRefactor(CsvImporter)
-        print(instance.import_data(sys.argv[1], sys.argv[2]), end="")
+            inventoryInstance = InventoryRefactor(CsvImporter)
+        print(inventoryInstance.import_data(sys.argv[1], sys.argv[2]), end="")
 
 
 if __name__ == "__main__":
