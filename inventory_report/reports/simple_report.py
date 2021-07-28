@@ -4,7 +4,10 @@ from datetime import datetime
 class SimpleReport:
     @staticmethod
     def discard_dates_below_today(str_date):
-        """ Função recebe uma data em formato String e retorna True se for uma data futura à data atual"""
+        """
+            Função recebe uma data em formato String e retorna
+            True se for uma data futura à data atual
+        """
         today = datetime.now()
         return datetime.strptime(str_date, "%Y-%m-%d") > today
 
