@@ -9,8 +9,7 @@ class JsonImporter(Importer):
             if not path.endswith('.json'):
                 raise ValueError('Arquivo inválido')
             with open(path) as file:
-                data_report = file.read()
-                data = json.loads(data_report)
+                data = json.loads(file.read())
                 return data
         except FileNotFoundError:
             raise ValueError('Arquivo não encontrado')
