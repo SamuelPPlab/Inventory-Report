@@ -3,6 +3,7 @@ import csv
 
 
 class CsvImporter(Importer):
+    # comentado somente para modificar projeto e subir
     def import_data(report_path):
         document_type = report_path[-3:]
         if document_type != "csv":
