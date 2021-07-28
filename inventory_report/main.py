@@ -21,3 +21,5 @@ def main():
 
     inventory = InventoryRefactor(types[ext])
     print(inventory.import_data(file_path, type), end="")
+
+# Commit de Avaliação
