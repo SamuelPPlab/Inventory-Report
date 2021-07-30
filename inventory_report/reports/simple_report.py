@@ -16,7 +16,6 @@ class SimpleReport:
         )
 
         company_with_the_most_product_quantity = mode(
-            ####
             product["nome_da_empresa"] for product in list
         )
 
