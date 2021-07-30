@@ -8,6 +8,8 @@ class XmlImporter(Importer):
         with open(arq, "r") as content:
             parser = xml_to_dict.XMLtoDict()
             file = content.read()
-            result = parser.parse(file)
-            result_final = [dict(line) for line in result["dataset"]["record"]]
+            content_all = parser.parse(file)
+            result_final = [
+                dict(line) for line in content_all["dataset"]["record"]
+            ]
             return result_final
