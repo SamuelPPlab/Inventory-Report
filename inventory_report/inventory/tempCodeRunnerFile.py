@@ -7,4 +7,3 @@ class Inventory:
                 for string in file_reader:
                     list.append(string)
             return Generate_Report.generate(list, report_type)
-#Evaluator
