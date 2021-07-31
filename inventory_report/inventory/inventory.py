@@ -38,7 +38,7 @@ class Inventory:
         return json.load(reader)
 
     def open_xml_archive(file):
-        # Creditos ao Carlos Souza, esse cara é genial, haha
+        # Creditos ao Carlos Souza, esse cara é genial, haha o/
         tree = ET.parse(file)
         root = tree.getroot()
         result = []
