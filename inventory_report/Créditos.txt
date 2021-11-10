@@ -1,0 +1,2 @@
+Esse projeto está feito graças ao PR da minha dupla Cezar Augusto,
+PR: https://github.com/tryber/sd-07-inventory-report/pull/28/files
